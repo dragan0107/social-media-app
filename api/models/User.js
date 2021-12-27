@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema(
     {
@@ -43,6 +44,12 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+userSchema.pre('save', async function (next) {
+    this.password = await bcrypt.hash(this.password, 12);
+    next();
+});
+
+// eslint-disable-next-line new-cap
 const User = new mongoose.model('user', userSchema);
 
 module.exports = User;
