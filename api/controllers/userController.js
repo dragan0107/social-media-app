@@ -1,7 +1,94 @@
-exports.getUser = (req, res) => {
-    res.status(200).json({
-        user: {
-            username: 'drip',
-        },
-    });
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const User = require('../models/User');
+
+exports.getUser = async (req, res) => {
+    try {
+        const foundUser = await User.findById(req.params.id);
+        const { password, updatedAt, ...rest } = foundUser._doc;
+
+        res.status(200).json(rest);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something went wrong.',
+        });
+    }
+};
+
+exports.updateUser = async (req, res) => {
+    if (req.body.userId === req.params.id || req.body.isAdmin) {
+        if (req.body.password) {
+            try {
+                req.body.password = await bcrypt.hash(req.body.password, 12);
+            } catch (error) {
+                console.log(error);
+                return res.status(400).json({
+                    message: 'Something went wrong.',
+                });
+            }
+        }
+        try {
+            const updatedUser = await User.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $set: req.body,
+                },
+                {
+                    new: true,
+                }
+            );
+            console.log(updatedUser);
+            res.status(200).json({
+                message: 'User info successfully updated.',
+                updatedUser,
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                message: 'Something went wrong.',
+            });
+        }
+    }
+};
+
+exports.deleteUser = async (req, res) => {
+    if (req.body.userId === req.params.id || req.body.isAdmin) {
+        try {
+            await User.findByIdAndDelete(req.params.id);
+            res.status(200).json({
+                message: 'User successfully deleted.',
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                message: 'Something went wrong.',
+            });
+        }
+    }
+};
+
+exports.followUser = async (req, res) => {
+    if (req.params.id !== req.body.userId) {
+        try {
+            const user = await User.findById(req.params.id);
+            const currentUser = await User.findById(req.body.userId);
+            if (!user.followers.includes(req.body.userId)) {
+                await user.updateOne({ $push: { followers: req.body.userId } });
+                await currentUser.updateOne({
+                    $push: { following: req.params.id },
+                });
+                res.status(200).json({
+                    message: 'User has been followed.',
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: 'Something went wrong.',
+            });
+        }
+    } else {
+        res.status(400).json({
+            message: "You can't follow yourself.",
+        });
+    }
 };

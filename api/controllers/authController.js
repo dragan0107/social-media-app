@@ -32,17 +32,19 @@ exports.userLogin = async (req, res) => {
 
     try {
         const foundUser = await User.findOne({ username });
+
         if (!foundUser) {
-            return res.status(404).json({
-                message: "User doesn't exist.",
-            });
+            return res.status(404).json({ message: "User doesn't exist." });
         }
+
         const validatePass = await bcrypt.compare(password, foundUser.password);
+
         if (!validatePass) {
             return res.status(404).json({
                 message: 'Wrong credentials.',
             });
         }
+        //If everything's ok, it will send success message.
         res.status(200).json({
             message: 'Login success.',
         });
