@@ -80,6 +80,10 @@ exports.followUser = async (req, res) => {
                 res.status(200).json({
                     message: 'User has been followed.',
                 });
+            } else {
+                res.status(403).json({
+                    message: 'You already follow this user.',
+                });
             }
         } catch (error) {
             res.status(500).json({
@@ -89,6 +93,36 @@ exports.followUser = async (req, res) => {
     } else {
         res.status(400).json({
             message: "You can't follow yourself.",
+        });
+    }
+};
+
+exports.unfollowUser = async (req, res) => {
+    if (req.params.id !== req.body.userId) {
+        try {
+            const user = await User.findById(req.params.id);
+            const currentUser = await User.findById(req.body.userId);
+            if (user.followers.includes(req.body.userId)) {
+                await user.updateOne({ $pull: { followers: req.body.userId } });
+                await currentUser.updateOne({
+                    $pull: { following: req.params.id },
+                });
+                res.status(200).json({
+                    message: 'User has been unfollowed.',
+                });
+            } else {
+                res.status(403).json({
+                    message: 'You do not follow this user.',
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: 'Something went wrong.',
+            });
+        }
+    } else {
+        res.status(400).json({
+            message: "You can't unfollow yourself.",
         });
     }
 };
