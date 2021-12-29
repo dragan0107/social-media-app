@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/posts');
 
 const app = express();
 const port = 8080;
@@ -18,8 +19,9 @@ mongoose
     .catch((err) => console.log(err));
 
 // API endpoints
-app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/posts', postRouter);
 
 app.listen(port, () =>
     console.log(`Social media app listening on port ${port}!`)

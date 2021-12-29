@@ -7,10 +7,11 @@ const {
     unfollowUser,
 } = require('../controllers/userController');
 
-router.get('/:id', getUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
-router.put('/:id/follow', followUser);
-router.put('/:id/unfollow', unfollowUser);
+router
+    .get('/:id', getUser)
+    .put('/:id', updateUser)
+    .delete('/:id', deleteUser)
+    .put('/:id/follow', followUser)
+    .put('/:id/unfollow', unfollowUser);
 
 module.exports = router;
