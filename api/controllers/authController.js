@@ -10,12 +10,12 @@ exports.userRegister = async (req, res) => {
         });
 
         res.status(201).json({
-            msg: 'user registered',
+            message: 'User registered',
             user: newUser,
         });
     } catch (error) {
         res.status(400).json({
-            message: 'something went wrong',
+            message: 'Something went wrong..',
             error: error,
         });
     }
