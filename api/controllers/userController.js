@@ -21,7 +21,6 @@ exports.updateUser = async (req, res) => {
             try {
                 req.body.password = await bcrypt.hash(req.body.password, 12);
             } catch (error) {
-                console.log(error);
                 return res.status(400).json({
                     message: 'Something went wrong.',
                 });
@@ -37,13 +36,11 @@ exports.updateUser = async (req, res) => {
                     new: true,
                 }
             );
-            console.log(updatedUser);
             res.status(200).json({
                 message: 'User info successfully updated.',
                 updatedUser,
             });
         } catch (error) {
-            console.log(error);
             res.status(500).json({
                 message: 'Something went wrong.',
             });
@@ -59,7 +56,6 @@ exports.deleteUser = async (req, res) => {
                 message: 'User successfully deleted.',
             });
         } catch (error) {
-            console.log(error);
             res.status(500).json({
                 message: 'Something went wrong.',
             });

@@ -1,0 +1,47 @@
+:root {
+    font-size: 16px;
+}
+
+.topbar {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #548CFF;
+    font-family: 'Ubuntu', sans-serif;
+    
+}
+
+
+
+.profile-pic {
+    width: 35px;
+    height: 35px;
+}
+
+.left {
+    flex: 4;
+    color: white;
+}
+
+.brand-name {
+    font-size: 3rem;
+}
+
+.center {
+    flex: 6;
+}
+
+.center > input {
+    height: 30px;
+    line-height: 20px;
+    font-size: 20px;
+    outline: none;
+    border-radius: 30px;
+    border: none;
+    padding: 7px;
+    max-width: 350px;
+}
+
+.right {
+    flex: 2;
+}
