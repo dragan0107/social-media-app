@@ -10,6 +10,7 @@
     font-family: 'Ubuntu', sans-serif;
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 
 .topbar a {

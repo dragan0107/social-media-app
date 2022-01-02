@@ -1,3 +1,86 @@
+
 .sidebar {
-    flex: 3;
+    flex: 2.5;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Overpass', sans-serif;
+    height: calc(100vh - 73.78px);
+    overflow-y: scroll;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar-top-list {
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-top-list-item {
+    padding: 1.5%;
+    display: flex;
+    width: 50%;
+    margin: 0 5% 5% 5%;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-top-list-item:hover {
+    background-color: grey;
+    color: white;
+}
+
+.sidebar-top-icon {
+    font-size: 1.3rem;
+    margin-left: 25%;
+    margin-top: 2px;
+}
+
+.icon-span {
+    font-size: 1.2rem;
+    margin-left: 5%;
+}
+.groups-span {
+    margin-left: 3.8%;
+}
+
+
+
+.friends-list-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-friend {
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    border-radius: 25px;
+    padding: 0.3rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.friend-name{
+    margin-left: 4%;
+}
+
+.sidebar-friend:hover {
+    background-color: grey;
+}
+
+hr {
+    border: none;
+    height: 12px;
+    color: #333;
+    background-color: grey;
 }
