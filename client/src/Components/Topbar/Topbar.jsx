@@ -16,15 +16,15 @@ const Topbar = () => {
                 <div className="info">
                     <div className="notification friend">
                         <i class="fas fa-user-friends"></i>
-                        <span className="count">1</span>
+                        <span className="count">3</span>
                     </div>
                     <div className="notification ">
                         <i class="fas fa-envelope"></i>
-                        <span className="count">1</span>
+                        <span className="count">4</span>
                     </div>
                     <div className="notification ">
                         <i class="fas fa-bell"></i>
-                        <span className="count">1</span>
+                        <span className="count">8</span>
                     </div>
                     <img
                         className="profile-pic"
