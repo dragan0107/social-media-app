@@ -1,0 +1,94 @@
+.share-wrapper {
+    display: flex;
+    width: 550px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 11px 0px #787878; 
+    box-shadow: 1px 1px 11px 0px #787878;
+    height: 170px;
+    border-radius: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 3% 0 2% 0;
+}
+
+.share-top {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    padding: 0 20px;
+}
+
+
+.share-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 2%;
+    
+}
+.separator-line {
+    height: .5px;
+    color: grey;
+    width: 80%;
+    margin: 2% 0;
+}
+
+.user-pfp {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+}
+
+#media-input {
+    display: none;
+}
+
+.media-span {
+    margin-left: 6px;
+}
+
+#status-textbox {
+    outline: none;
+    /* border: .5px solid grey; */
+    border:none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-family: Overpass;
+    font-weight: 300;
+    padding: 6px;
+    margin-left: 10px;
+    resize: none;
+}
+
+.add-media label {
+    cursor: pointer;
+    font-size: .8rem;
+}
+
+.share-btn {
+    border:none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    background-color: #4178e6;
+    color: white;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+}
+
+.share-btn:hover {
+    background-color: #0c2861d8;
+}
+
+
+.media-icon {
+    font-size: 1.5rem;
+    color: royalblue;
+    transition: all .2s ease-in-out;
+
+}
+.media-icon:hover {
+    color: rgb(23, 35, 71);
+}
