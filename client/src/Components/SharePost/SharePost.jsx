@@ -11,10 +11,6 @@ const SharePost = () => {
                         alt=""
                         className="user-pfp"
                     />
-                    {/* <input
-                        type="text"
-                        placeholder="What's on your mind Drip?"
-                    /> */}
                     <textarea
                         name=""
                         id="status-textbox"
