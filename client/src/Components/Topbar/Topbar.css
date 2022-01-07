@@ -64,20 +64,25 @@
     position: relative;
     margin: 5%;
     cursor: pointer;
+    color: black;
 }
 
-.notification i:hover {
+.white-notification {
     color: white;
 }
 
 .count {
     color: white;
     position: absolute;
+    height: 19px;
+    width: 19px;
     right: -13px;
     top: -7px;
     background-color: red;
-    padding: 1px 5px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-pic {

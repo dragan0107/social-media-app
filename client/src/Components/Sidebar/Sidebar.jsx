@@ -28,7 +28,6 @@ const Sidebar = () => {
             </ul>
             <hr className="sidebar-hr" />
             <ul className="friends-list-sidebar">
-                <h4>Online friends:</h4>
                 <li className="sidebar-friend">
                     <img
                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"

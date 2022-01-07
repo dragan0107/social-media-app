@@ -2,6 +2,9 @@ import React from 'react';
 import './Topbar.css';
 
 const Topbar = () => {
+    const friendReq = 3;
+    const messages = 1;
+    const notifications = 8;
     return (
         <div className="topbar">
             <div className="left">
@@ -14,17 +17,35 @@ const Topbar = () => {
             </div>
             <div className="right">
                 <div className="info">
-                    <div className="notification friend">
+                    <div
+                        className={`notification ${
+                            friendReq > 0 ? 'white-notification' : ''
+                        } `}
+                    >
                         <i class="fas fa-user-friends"></i>
-                        <span className="count">3</span>
+                        {friendReq > 0 && (
+                            <span className="count">{friendReq}</span>
+                        )}
                     </div>
-                    <div className="notification ">
+                    <div
+                        className={`notification ${
+                            messages > 0 ? 'white-notification' : ''
+                        } `}
+                    >
                         <i class="fas fa-envelope"></i>
-                        <span className="count">4</span>
+                        {messages > 0 && (
+                            <span className="count">{messages}</span>
+                        )}
                     </div>
-                    <div className="notification ">
+                    <div
+                        className={`notification ${
+                            notifications > 0 ? 'white-notification' : ''
+                        } `}
+                    >
                         <i class="fas fa-bell"></i>
-                        <span className="count">8</span>
+                        {notifications > 0 && (
+                            <span className="count">{notifications}</span>
+                        )}
                     </div>
                     <img
                         className="profile-pic"

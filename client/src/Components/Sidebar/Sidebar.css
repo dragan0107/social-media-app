@@ -77,14 +77,11 @@
 }
 
 .sidebar-friend:hover {
-    background-color: grey;
+    background-color: rgb(204, 203, 203);
 }
 
-hr {
-    border: none;
-    height: 12px;
-    color: #333;
-    background-color: grey;
+.sidebar-hr {
+    border: bottom .5px #333;
 }
 
 ::-webkit-scrollbar {

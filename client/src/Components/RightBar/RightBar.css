@@ -1,3 +1,84 @@
 .rightbar {
     flex: 3;
+    font-family: 'Lato', sans-serif;
+}
+
+.right-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.rightbar-top {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.gift-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.middle-img {
+    margin: 10px;
+    border-radius: 4px;
+}
+
+
+.rightbar-friend-list {
+    list-style: none;
+}
+
+.rightbar-friend {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: 3px 5px;
+    width: 70%;
+}
+.rightbar-friend:hover {
+   background-color: rgb(204, 203, 203);
+}
+
+.online-friends {
+    font-weight: 700;
+}
+
+
+.rightbar-hr {
+    height: .5px;
+    color: grey;
+    width: 100%;
+    margin: 5% 0;
+}
+
+.friend-pfp {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friend-image-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.friend-online {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(47, 255, 82);
+    border-radius: 50%;
+    border: 2px solid white;
+    top: -3px;
+    left: 33px;
+}
+
+.friend-name {
+    font-weight: 700;
 }
