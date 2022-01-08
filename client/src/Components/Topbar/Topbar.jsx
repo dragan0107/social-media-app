@@ -3,7 +3,7 @@ import './Topbar.css';
 
 const Topbar = () => {
     const friendReq = 3;
-    const messages = 1;
+    const messages = 0;
     const notifications = 8;
     return (
         <div className="topbar">
