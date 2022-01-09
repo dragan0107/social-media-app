@@ -9,6 +9,8 @@
     font-family: 'Overpass', sans-serif;
     height: calc(100vh - 73.78px);
     overflow-y: scroll;
+    position: sticky;
+    top: 73.91px;
 }
 
 .sidebar ul {

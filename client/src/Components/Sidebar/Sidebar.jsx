@@ -1,4 +1,5 @@
 import React from 'react';
+import CloseFriend from '../CloseFriend/CloseFriend';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -28,158 +29,13 @@ const Sidebar = () => {
             </ul>
             <hr className="sidebar-hr" />
             <ul className="friends-list-sidebar">
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
-                <li className="sidebar-friend">
-                    <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                        className="sidebar-profile-pic"
-                    />
-                    <span className="friend-name">Drip Drip</span>
-                </li>
+                <CloseFriend />
+                <CloseFriend />
+                <CloseFriend />
+                <CloseFriend />
+                <CloseFriend />
+                <CloseFriend />
+                <CloseFriend />
             </ul>
         </div>
     );
