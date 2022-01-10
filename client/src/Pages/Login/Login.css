@@ -1,0 +1,51 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(241, 241, 241);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.login-wrapper {
+    display: flex;
+    height: 100vh;
+    padding: 10em;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-left {
+    flex: 5;
+    padding: 2em 4em;
+}
+
+.login-right {
+    flex: 5;
+    padding: 1em;
+}
+
+.login-brand {
+    font-size: 3em;
+    color: #3676f7;
+}
+
+.login-about {
+    font-size: 1.3em;
+    line-height: 3em;
+}
+
+.right-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 1.3em;
+}
+
+.right-wrapper input {
+    width: 80%;
+    padding: 1em;
+    margin: 1.2em;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
