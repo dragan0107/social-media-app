@@ -82,3 +82,57 @@
 .friend-name {
     font-weight: 700;
 }
+
+
+/* ------------------PROFILE RIGHTBAR BOX ------------------------ */
+
+.profile-rightbar-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-friends {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.single-friend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .6em;
+}
+
+.friends-tag {
+    margin: 1em 0;
+    font-size: 1.2em;
+}
+
+.user-friend-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.rightbar-info h4 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.info-item {
+    color: grey;
+    margin-bottom: 1em;
+}
+
+.info-first {
+    font-weight: 700;
+    margin-right: 0.4em;
+}
+
+.user-info-line {
+    height: 1px;
+    background-color: rgb(160, 160, 160);
+    width: 70%;
+    margin-bottom: 1.3em;
+}

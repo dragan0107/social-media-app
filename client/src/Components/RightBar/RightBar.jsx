@@ -1,5 +1,6 @@
 import React from 'react';
 import OnlineFriend from '../OnlineFriend/OnlineFriend';
+import ProfileFriend from '../ProfileFriend/ProfileFriend';
 import './RightBar.css';
 
 const RightBar = ({ profile }) => {
@@ -37,8 +38,41 @@ const RightBar = ({ profile }) => {
     const ProfileRightbar = () => {
         return (
             <>
-                <h4>User information</h4>
-                <section className="rightbar-info"></section>
+                <div className="profile-rightbar-wrapper">
+                    <section className="rightbar-info">
+                        <h4>User information</h4>
+                        <div className="user-info-line"></div>
+                        <div className="info-item">
+                            <span className="info-first">Living in: </span>
+                            <span className="user-city">New York</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-first">City:</span>
+                            <span className="user-city">New York</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-first">
+                                Relationship status:
+                            </span>
+                            <span className="user-city">Single</span>
+                        </div>
+                    </section>
+                    <h4 className="friends-tag">Friends</h4>
+                    <div className="user-info-line"></div>
+                    <section className="user-friends">
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                        <ProfileFriend />
+                    </section>
+                </div>
             </>
         );
     };
