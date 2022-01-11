@@ -14,16 +14,16 @@ const Login = () => {
                 </div>
                 <div className="login-right">
                     <div className="right-wrapper">
+                        <h1 className="welcome-back">Welcome back!</h1>
                         <input type="text" placeholder="Username" />
                         <input type="password" placeholder="Password" />
                         <button className="login-btn">Log In</button>
+                        <button id="login-register">
+                            Create a new account
+                        </button>
                         <a className="forgot-pass" href="">
                             Forgot Your password?
                         </a>
-                        <button className="login-btn">Log In</button>
-                        <button className="login-register">
-                            Create a new account
-                        </button>
                     </div>
                 </div>
             </div>

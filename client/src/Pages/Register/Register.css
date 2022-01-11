@@ -1,11 +1,11 @@
-.login {
+.register {
     height: 100vh;
     width: 100vw;
     background-color: rgb(241, 241, 241);
     font-family: 'Ubuntu', sans-serif;
 }
 
-.login-wrapper {
+.register-wrapper {
     display: flex;
     height: 100vh;
     padding: 10em;
@@ -13,22 +13,22 @@
     align-items: center;
 }
 
-.login-left {
+.register-left {
     flex: 5;
     padding: 2em 4em;
 }
 
-.login-right {
+.register-right {
     flex: 5;
     padding: 1em;
 }
 
-.login-brand {
+.register-brand {
     font-size: 3em;
     color: #3676f7;
 }
 
-.login-about {
+.register-about {
     font-size: 1.3em;
     line-height: 3em;
 }
@@ -47,10 +47,11 @@
 
 .right-wrapper input {
     width: 50%;
-    padding: 1em;
-    margin: 1.2em;
+    padding: .75em;
+    margin: .6em;
     border-radius: 5px;
     border: 1px solid grey;
+    font-size: 1.1em;
 }
 
 .right-wrapper button {
@@ -65,35 +66,35 @@
     cursor: pointer;
 }
 
-.login-btn:hover {
+.register-btn:hover {
     background-color: #2d5ab4;
 }
 
-#login-register {
+#login-existing {
     background-color: rgb(19, 177, 19);
 }
 
-#login-register:hover {
+#login-existing:hover {
     background-color: rgb(21, 121, 21);
 }
 
-.welcome-back {
+.join-fb {
     font-weight: 500;
     margin-bottom: .8em;
     color: #3676f7;
 }
 
 @media (max-width: 1462px) {
-    .login {
+    .register {
         font-size: 12px;
     }
 }
 
 @media (max-width: 1000px) {
-    .login {
+    .register {
         font-size: 14px;
     }
-    .login-wrapper {
+    .register-wrapper {
         flex-direction: column;
     }
 
