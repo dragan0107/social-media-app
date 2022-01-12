@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Topbar.css';
 
 const Topbar = () => {
@@ -12,46 +13,53 @@ const Topbar = () => {
             </div>
             <div className="center">
                 <input type="text" placeholder="Search" />
-                <a href="">Homepage</a>
+                <Link to="/">
+                    <a href="">Homepage</a>
+                </Link>
+
                 <a href="">Timeline</a>
             </div>
             <div className="right">
                 <div className="info">
-                    <div
-                        className={`notification ${
-                            friendReq > 0 ? 'white-notification' : ''
-                        } `}
-                    >
-                        <i class="fas fa-user-friends"></i>
-                        {friendReq > 0 && (
-                            <span className="count">{friendReq}</span>
-                        )}
+                    <div className="info-right">
+                        <div
+                            className={`notification ${
+                                friendReq > 0 ? 'white-notification' : ''
+                            } `}
+                        >
+                            <i class="fas fa-user-friends"></i>
+                            {friendReq > 0 && (
+                                <span className="count">{friendReq}</span>
+                            )}
+                        </div>
+                        <div
+                            className={`notification ${
+                                messages > 0 ? 'white-notification' : ''
+                            } `}
+                        >
+                            <i class="fas fa-envelope"></i>
+                            {messages > 0 && (
+                                <span className="count">{messages}</span>
+                            )}
+                        </div>
+                        <div
+                            className={`notification ${
+                                notifications > 0 ? 'white-notification' : ''
+                            } `}
+                        >
+                            <i class="fas fa-bell"></i>
+                            {notifications > 0 && (
+                                <span className="count">{notifications}</span>
+                            )}
+                        </div>
                     </div>
-                    <div
-                        className={`notification ${
-                            messages > 0 ? 'white-notification' : ''
-                        } `}
-                    >
-                        <i class="fas fa-envelope"></i>
-                        {messages > 0 && (
-                            <span className="count">{messages}</span>
-                        )}
-                    </div>
-                    <div
-                        className={`notification ${
-                            notifications > 0 ? 'white-notification' : ''
-                        } `}
-                    >
-                        <i class="fas fa-bell"></i>
-                        {notifications > 0 && (
-                            <span className="count">{notifications}</span>
-                        )}
-                    </div>
-                    <img
-                        className="profile-pic"
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt=""
-                    />
+                    <Link to="/profile">
+                        <img
+                            className="profile-pic"
+                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                            alt=""
+                        />
+                    </Link>
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ const Profile = () => {
                             />
                         </div>
                         <div className="profile-info">
-                            <h4 className="profile-user-name">Dragan S</h4>
+                            <h4 className="profile-user-name">Drip 016</h4>
                             <span className="profile-desc">
                                 Welcome to my profile page, you can see more
                                 information about me!

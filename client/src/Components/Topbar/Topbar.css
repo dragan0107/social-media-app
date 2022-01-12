@@ -51,8 +51,14 @@
 
 .info {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+}
+
+.info-right {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
 }
 
 .notification i {
@@ -89,7 +95,7 @@
     width: 35px;
     height: 35px;
     border-radius: 20px;
-    margin-left: 10%;
     cursor: pointer;
     object-fit: cover;
+    /* margin-left: 10%; */
 }
