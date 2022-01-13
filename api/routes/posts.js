@@ -12,7 +12,7 @@ const {
 
 router
     .get('/:postId', getPost)
-    .post('/timeline', getTimelinePosts)
+    .get('/timeline/:userId', getTimelinePosts)
     .post('/create', addPost)
     .put('/update/:postId', updatePost)
     .delete('/delete/:postId', deletePost)
