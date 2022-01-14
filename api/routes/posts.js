@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const {
     getPost,
+    getUserPosts,
     getTimelinePosts,
     addPost,
     updatePost,
@@ -12,6 +13,7 @@ const {
 
 router
     .get('/:postId', getPost)
+    .get('/user/:username', getUserPosts)
     .get('/timeline/:userId', getTimelinePosts)
     .post('/create', addPost)
     .put('/update/:postId', updatePost)

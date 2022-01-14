@@ -7,23 +7,23 @@ const Sidebar = () => {
         <div className="sidebar">
             <ul className="sidebar-top-list">
                 <li className="sidebar-top-list-item">
-                    <i class="sidebar-top-icon fas fa-envelope"></i>
+                    <i className="sidebar-top-icon fas fa-envelope"></i>
                     <span className="icon-span">Chats</span>
                 </li>
                 <li className="sidebar-top-list-item">
-                    <i class="sidebar-top-icon fas fa-play-circle"></i>
+                    <i className="sidebar-top-icon fas fa-play-circle"></i>
                     <span className="icon-span">Videos</span>
                 </li>
                 <li className="sidebar-top-list-item">
-                    <i class="sidebar-top-icon fas fa-users"></i>
+                    <i className="sidebar-top-icon fas fa-users"></i>
                     <span className="icon-span groups-span">Groups</span>
                 </li>
                 <li className="sidebar-top-list-item">
-                    <i class="sidebar-top-icon fas fa-briefcase"></i>
+                    <i className="sidebar-top-icon fas fa-briefcase"></i>
                     <span className="icon-span ">Jobs</span>
                 </li>
                 <li className="sidebar-top-list-item">
-                    <i class="sidebar-top-icon fas fa-pager"></i>
+                    <i className="sidebar-top-icon fas fa-pager"></i>
                     <span className="icon-span">Pages</span>
                 </li>
             </ul>

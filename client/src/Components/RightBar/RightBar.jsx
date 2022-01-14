@@ -3,7 +3,7 @@ import OnlineFriend from '../OnlineFriend/OnlineFriend';
 import ProfileFriend from '../ProfileFriend/ProfileFriend';
 import './RightBar.css';
 
-const RightBar = ({ profile }) => {
+const RightBar = ({ profile, user }) => {
     const HomeRightbar = () => {
         return (
             <>
@@ -44,11 +44,15 @@ const RightBar = ({ profile }) => {
                         <div className="user-info-line"></div>
                         <div className="info-item">
                             <span className="info-first">Living in: </span>
-                            <span className="user-city">New York</span>
+                            <span className="user-city">
+                                {user.city || <i>User did not specify.</i>}
+                            </span>
                         </div>
                         <div className="info-item">
-                            <span className="info-first">City:</span>
-                            <span className="user-city">New York</span>
+                            <span className="info-first">From:</span>
+                            <span className="user-city">
+                                {user.from || <i>User did not specify.</i>}
+                            </span>
                         </div>
                         <div className="info-item">
                             <span className="info-first">

@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { format } from 'timeago.js';
+import { Link } from 'react-router-dom';
 import './Post.css';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
-const Post = ({ post }) => {
+const Post = ({ post, username }) => {
     const [user, setUser] = useState({});
 
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get(`/users/${post.userId}`);
+                const res = await axios.get(`/users/?userId=${post.userId}`);
+                // console.log(res);
                 setUser(res.data);
             } catch (error) {
                 console.log(error);
@@ -23,17 +26,21 @@ const Post = ({ post }) => {
         <div className="post">
             <div className="post-wrapper">
                 <div className="post-top">
-                    <img
-                        className="post-pfp"
-                        src={
-                            user.profilePic
-                                ? user.profilePic
-                                : 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
-                        }
-                        alt=""
-                    />
+                    <Link to={`/profile/${user.username}`}>
+                        <img
+                            className="post-pfp"
+                            src={
+                                user.profilePic
+                                    ? user.profilePic
+                                    : 'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                            }
+                            alt=""
+                        />
+                    </Link>
                     <span className="post-author">{user.username}</span>
-                    <span className="post-created">5 min ago</span>
+                    <span className="post-created">
+                        {format(post.createdAt)}
+                    </span>
                     <MoreVertIcon className="dots-icon" />
                 </div>
                 <div className="post-mid">

@@ -17,7 +17,7 @@ const SharePost = () => {
                         cols="50"
                         rows="2"
                         placeholder="What's on your mind Drip?"
-                        maxlength="280"
+                        maxLength="280"
                         autoFocus
                     ></textarea>
                 </div>

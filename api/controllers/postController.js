@@ -108,6 +108,25 @@ exports.getTimelinePosts = async (req, res) => {
     }
 };
 
+// Get all posts from a single user
+
+exports.getUserPosts = async (req, res) => {
+    try {
+        const foundUser = await User.findOne({ username: req.params.username });
+        const allPosts = await Post.find({ userId: foundUser._id }).sort(
+            '-createdAt'
+        );
+        res.status(200).json({
+            message: 'Success',
+            allPosts,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something went wrong.',
+        });
+    }
+};
+
 // Like a post.
 exports.likePost = async (req, res) => {
     try {

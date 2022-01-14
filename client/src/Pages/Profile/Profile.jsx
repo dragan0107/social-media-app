@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Profile.css';
 import Feed from '../../Components/Feed/Feed';
 import RightBar from '../../Components/RightBar/RightBar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import Topbar from '../../Components/Topbar/Topbar';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+    const username = useParams().username;
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get(`/users/?username=${username}`);
+
+                setUser(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getUser();
+    }, [username]);
     return (
         <div>
             <Topbar />
@@ -16,26 +33,38 @@ const Profile = () => {
                         <div className="profile-cover">
                             <img
                                 className="profile-cover-img"
-                                src="https://a.cdn-hotels.com/gdcs/production103/d1782/cad3ba60-fe12-11e8-85c5-0242ac110002.jpg"
+                                src={
+                                    user.coverPic ||
+                                    'https://a.cdn-hotels.com/gdcs/production103/d1782/cad3ba60-fe12-11e8-85c5-0242ac110002.jpg'
+                                }
                                 alt=""
                             />
                             <img
                                 className="profile-user-img"
-                                src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+                                src={
+                                    user.profilePic ||
+                                    'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                                }
                                 alt=""
                             />
                         </div>
                         <div className="profile-info">
-                            <h4 className="profile-user-name">Drip 016</h4>
+                            <h4 className="profile-user-name">
+                                {user.username}
+                            </h4>
                             <span className="profile-desc">
-                                Welcome to my profile page, you can see more
-                                information about me!
+                                {user.desc || (
+                                    <i>
+                                        User hasn't added any additional
+                                        information yet...
+                                    </i>
+                                )}
                             </span>
                         </div>
                     </div>
                     <div className="profile-right-bottom">
-                        <Feed />
-                        <RightBar profile={true} />
+                        <Feed username={username} />
+                        <RightBar user={user} profile={true} />
                     </div>
                 </div>
             </div>

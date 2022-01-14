@@ -4,9 +4,12 @@ const User = require('../models/User');
 
 exports.getUser = async (req, res) => {
     try {
-        const foundUser = await User.findById(req.params.id);
-        const { password, updatedAt, ...rest } = foundUser._doc;
+        const { username, userId } = req.query;
 
+        const foundUser = username
+            ? await User.findOne({ username })
+            : await User.findById(userId);
+        const { password, updatedAt, ...rest } = foundUser._doc;
         res.status(200).json(rest);
     } catch (error) {
         res.status(500).json({
