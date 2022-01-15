@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
     return (
-        <Context.Provider
+        <AuthContext.Provider
             value={{
                 user: state.user,
                 isFetching: state.isFetching,
@@ -21,6 +21,6 @@ export const AuthContextProvider = ({ children }) => {
             }}
         >
             {children}
-        </Context.Provider>
+        </AuthContext.Provider>
     );
 };

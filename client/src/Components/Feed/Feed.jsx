@@ -3,6 +3,8 @@ import axios from 'axios';
 import Post from '../Post/Post';
 import SharePost from '../SharePost/SharePost';
 import './Feed.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Feed = ({ username }) => {
     const [posts, setPosts] = useState([]);

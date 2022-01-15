@@ -1,5 +1,24 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+
+//Token generator;
+
+const generateToken = (id) =>
+    jwt.sign({ id: id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+
+const createSendToken = (user, res) => {
+    const token = generateToken(user._id);
+
+    res.status(201).json({
+        message: 'User registered',
+        user: user,
+        jwt: token,
+    });
+};
+
 //Register
 exports.userRegister = async (req, res) => {
     try {
@@ -9,10 +28,9 @@ exports.userRegister = async (req, res) => {
             email: req.body.email,
         });
 
-        res.status(201).json({
-            message: 'User registered',
-            user: newUser,
-        });
+        const { password, isAdmin, ...rest } = newUser._doc;
+
+        createSendToken(rest, res);
     } catch (error) {
         res.status(400).json({
             message: 'Something went wrong..',

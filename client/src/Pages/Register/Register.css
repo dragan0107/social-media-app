@@ -70,6 +70,12 @@
     background-color: #2d5ab4;
 }
 
+form {
+    display: inline;
+    /* text-align: center; */
+    width: 100%;
+}
+
 #login-existing {
     background-color: rgb(19, 177, 19);
     width: 50%;

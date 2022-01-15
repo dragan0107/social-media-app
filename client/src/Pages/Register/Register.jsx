@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { registerUser } from '../../API_Actions/ApiCalls';
+import { AuthContext } from '../../Context/AuthContext';
 import './Register.css';
 
 const Register = () => {
+    const { user, isFetching, error, dispatch } = useContext(AuthContext);
+    const username = useRef();
+    const email = useRef();
+    const password = useRef();
+    const passwordConfirm = useRef();
+    const handleSubmit = (e) => {
+        console.log(isFetching);
+        e.preventDefault();
+        registerUser(username, email, password, dispatch);
+    };
+    console.log(user);
+
     return (
         <div className="register">
             <div className="register-wrapper">
@@ -14,20 +28,38 @@ const Register = () => {
                     </span>
                 </div>
                 <div className="register-right">
-                    <div className="right-wrapper">
+                    <form
+                        className="right-wrapper"
+                        action=""
+                        onSubmit={handleSubmit}
+                    >
                         <h1 className="join-fb">Join Friendbook!</h1>
-                        <input type="text" placeholder="Username" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
-                        <input type="password" placeholder="Password Confirm" />
-                        <button className="register-btn">Sign Up</button>
+                        <input
+                            ref={username}
+                            type="text"
+                            placeholder="Username"
+                        />
+                        <input ref={email} type="email" placeholder="Email" />
+                        <input
+                            ref={password}
+                            type="password"
+                            placeholder="Password"
+                        />
+                        <input
+                            ref={passwordConfirm}
+                            type="password"
+                            placeholder="Password Confirm"
+                        />
+                        <button className="register-btn" type="submit">
+                            Sign Up
+                        </button>
                         <Link id="login-existing" to="/login">
                             Login with existing account
                         </Link>
                         <a className="forgot-pass" href="">
                             Forgot Your password?
                         </a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
