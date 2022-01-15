@@ -6,6 +6,17 @@ import './Feed.css';
 
 const Feed = ({ username }) => {
     const [posts, setPosts] = useState([]);
+    const [userData, setUserData] = useState({});
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`/users/?username=${username}`);
+            // console.log(res);
+            setUserData(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         const getPosts = async () => {
@@ -20,14 +31,16 @@ const Feed = ({ username }) => {
                 console.log(error);
             }
         };
+
         getPosts();
+        if (username) getUser();
     }, [username]);
     return (
         <div className="feed">
             <div className="feed-wrapper">
                 <SharePost />
                 {posts.map((post) => (
-                    <Post key={post._id} post={post} />
+                    <Post key={post._id} post={post} userData={userData} />
                 ))}
             </div>
         </div>

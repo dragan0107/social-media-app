@@ -7,9 +7,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
-const Post = ({ post, username }) => {
+const Post = ({ post, userData }) => {
     const [user, setUser] = useState({});
-
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -20,24 +19,26 @@ const Post = ({ post, username }) => {
                 console.log(error);
             }
         };
-        getUser();
+        if (!userData.username) getUser();
     }, []);
     return (
         <div className="post">
             <div className="post-wrapper">
                 <div className="post-top">
-                    <Link to={`/profile/${user.username}`}>
+                    <Link to={`/profile/${user.username || userData.username}`}>
                         <img
                             className="post-pfp"
                             src={
-                                user.profilePic
-                                    ? user.profilePic
+                                userData.profilePic || user.profilePic
+                                    ? userData.profilePic || user.profilePic
                                     : 'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
                             }
                             alt=""
                         />
                     </Link>
-                    <span className="post-author">{user.username}</span>
+                    <span className="post-author">
+                        {userData.username || user.username}
+                    </span>
                     <span className="post-created">
                         {format(post.createdAt)}
                     </span>
