@@ -45,6 +45,10 @@
     width: 50%;
 }
 
+.logout-link {
+    cursor: pointer;
+}
+
 .right {
     flex: 2;
 }

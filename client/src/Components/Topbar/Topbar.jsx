@@ -1,11 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContext';
 import './Topbar.css';
 
 const Topbar = () => {
+    const { user, dispatch } = useContext(AuthContext);
+
+    const handleClick = () => {
+        localStorage.removeItem('jwt');
+        dispatch({ type: 'LOGOUT' });
+    };
     const friendReq = 3;
     const messages = 0;
     const notifications = 8;
+
     return (
         <div className="topbar">
             <div className="left">
@@ -18,6 +27,9 @@ const Topbar = () => {
                 </Link>
 
                 <a href="">Timeline</a>
+                <a className="logout-link" onClick={handleClick}>
+                    Log Out
+                </a>
             </div>
             <div className="right">
                 <div className="info">
@@ -53,10 +65,13 @@ const Topbar = () => {
                             )}
                         </div>
                     </div>
-                    <Link to="/profile">
+                    <Link to={`/profile/${user.username}`}>
                         <img
                             className="profile-pic"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                            src={
+                                user.profilePic ||
+                                'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                            }
                             alt=""
                         />
                     </Link>

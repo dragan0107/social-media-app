@@ -1,8 +1,22 @@
 import React from 'react';
+import { useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../API_Actions/ApiCalls';
+import { AuthContext } from '../../Context/AuthContext';
 import './Login.css';
 
 const Login = () => {
+    const { user, isFetching, dispatch, error } = useContext(AuthContext);
+    const username = useRef();
+    const password = useRef();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        loginUser(username, password, dispatch);
+    };
+    console.log(user);
+
     return (
         <div className="login">
             <div className="login-wrapper">
@@ -14,11 +28,26 @@ const Login = () => {
                     </span>
                 </div>
                 <div className="login-right">
-                    <div className="right-wrapper">
+                    <form
+                        action=""
+                        className="right-wrapper"
+                        onSubmit={handleSubmit}
+                    >
                         <h1 className="welcome-back">Welcome back!</h1>
-                        <input type="text" placeholder="Username" />
-                        <input type="password" placeholder="Password" />
-                        <button className="login-btn">Log In</button>
+                        <input
+                            ref={username}
+                            type="text"
+                            placeholder="Username"
+                        />
+                        <input
+                            ref={password}
+                            type="password"
+                            placeholder="Password"
+                        />
+                        {error && <h4>Wrong credentials!!!</h4>}
+                        <button className="login-btn" type="submit">
+                            Log In
+                        </button>
 
                         <Link id="login-register" to="/register">
                             Create a new account
@@ -27,7 +56,7 @@ const Login = () => {
                         <a className="forgot-pass" href="">
                             Forgot Your password?
                         </a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

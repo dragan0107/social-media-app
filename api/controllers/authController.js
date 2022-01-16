@@ -12,9 +12,11 @@ const generateToken = (id) =>
 const createSendToken = (user, res) => {
     const token = generateToken(user._id);
 
+    const { password, ...rest } = user._doc;
+
     res.status(201).json({
-        message: 'User registered',
-        user: user,
+        message: 'Success',
+        user: rest,
         jwt: token,
     });
 };
@@ -28,9 +30,9 @@ exports.userRegister = async (req, res) => {
             email: req.body.email,
         });
 
-        const { password, isAdmin, ...rest } = newUser._doc;
+        // const { password, ...rest } = newUser._doc;
 
-        createSendToken(rest, res);
+        createSendToken(newUser, res);
     } catch (error) {
         res.status(400).json({
             message: 'Something went wrong..',
@@ -62,10 +64,7 @@ exports.userLogin = async (req, res) => {
                 message: 'Wrong credentials.',
             });
         }
-        //If everything's ok, it will send success message.
-        res.status(200).json({
-            message: 'Login success.',
-        });
+        createSendToken(foundUser, res);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -74,3 +73,10 @@ exports.userLogin = async (req, res) => {
         });
     }
 };
+
+// exports.protect = (req, res, next) => {
+//     console.log(req.headers.authorization);
+//     if (!req.headers.authorization)
+//         return next(new Error('Something went wrong'));
+//     next();
+// };

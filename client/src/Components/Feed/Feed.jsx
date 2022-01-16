@@ -6,28 +6,28 @@ import './Feed.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Feed = ({ username }) => {
+const Feed = ({ usernameURL }) => {
+    const { user } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
     const [userData, setUserData] = useState({});
 
     const getUser = async () => {
         try {
-            const res = await axios.get(`/users/?username=${username}`);
+            const res = await axios.get(`/users/?username=${usernameURL}`);
             // console.log(res);
             setUserData(res.data);
         } catch (error) {
             console.log(error);
         }
     };
-
     useEffect(() => {
         const getPosts = async () => {
             try {
-                const res = username
-                    ? await axios.get(`/posts/user/${username}`)
-                    : await axios.get(
-                          `/posts/timeline/61ca57000999c98f21dfe70e`
-                      );
+                console.log(user);
+                const res = usernameURL
+                    ? await axios.get(`/posts/user/${usernameURL}`)
+                    : await axios.get(`/posts/timeline/${user._id}`);
+                console.log(res.data);
                 setPosts(res.data.allPosts);
             } catch (error) {
                 console.log(error);
@@ -35,8 +35,8 @@ const Feed = ({ username }) => {
         };
 
         getPosts();
-        if (username) getUser();
-    }, [username]);
+        if (usernameURL) getUser();
+    }, []);
     return (
         <div className="feed">
             <div className="feed-wrapper">

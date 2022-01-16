@@ -6,13 +6,15 @@ import './Register.css';
 
 const Register = () => {
     const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
     const username = useRef();
     const email = useRef();
     const password = useRef();
     const passwordConfirm = useRef();
+
     const handleSubmit = (e) => {
-        console.log(isFetching);
         e.preventDefault();
+
         registerUser(username, email, password, dispatch);
     };
     console.log(user);

@@ -8,13 +8,13 @@ import Topbar from '../../Components/Topbar/Topbar';
 import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-    const username = useParams().username;
+    const usernameURL = useParams().username; // this username is from profile url
     const [user, setUser] = useState({});
 
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get(`/users/?username=${username}`);
+                const res = await axios.get(`/users/?username=${usernameURL}`);
 
                 setUser(res.data);
             } catch (error) {
@@ -22,7 +22,7 @@ const Profile = () => {
             }
         };
         getUser();
-    }, [username]);
+    }, [usernameURL]);
     return (
         <div>
             <Topbar />
@@ -63,7 +63,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="profile-right-bottom">
-                        <Feed username={username} />
+                        <Feed usernameURL={usernameURL} />
                         <RightBar user={user} profile={true} />
                     </div>
                 </div>

@@ -11,6 +11,8 @@ const {
     dislikePost,
 } = require('../controllers/postController');
 
+// const { protect } = require('../controllers/authController');
+
 router
     .get('/:postId', getPost)
     .get('/user/:username', getUserPosts)
