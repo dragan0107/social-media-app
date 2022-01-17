@@ -6,10 +6,11 @@ import './Feed.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Feed = ({ usernameURL }) => {
+const Feed = ({ usernameURL, profile }) => {
     const { user } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
     const [userData, setUserData] = useState({});
+    const [updated, setUpdated] = useState(false);
 
     const getUser = async () => {
         try {
@@ -36,11 +37,14 @@ const Feed = ({ usernameURL }) => {
 
         getPosts();
         if (usernameURL) getUser();
-    }, []);
+    }, [updated]);
     return (
         <div className="feed">
             <div className="feed-wrapper">
-                <SharePost />
+                {usernameURL === user.username && (
+                    <SharePost setUpdated={setUpdated} />
+                )}
+                {!profile && <SharePost setUpdated={setUpdated} />}
                 {posts.map((post) => (
                     <Post key={post._id} post={post} userData={userData} />
                 ))}

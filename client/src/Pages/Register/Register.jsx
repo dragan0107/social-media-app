@@ -14,8 +14,13 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        registerUser(username, email, password, dispatch);
+        if (password.current.value !== passwordConfirm.current.value) {
+            passwordConfirm.current.setCustomValidity(
+                'Passwords do not match, try again!'
+            );
+        } else {
+            registerUser(username, email, password, dispatch);
+        }
     };
     console.log(user);
 
@@ -46,11 +51,13 @@ const Register = () => {
                             ref={password}
                             type="password"
                             placeholder="Password"
+                            minLength={6}
                         />
                         <input
                             ref={passwordConfirm}
                             type="password"
                             placeholder="Password Confirm"
+                            minLength={6}
                         />
                         <button className="register-btn" type="submit">
                             Sign Up

@@ -1,13 +1,86 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../../Context/AuthContext';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useContext } from 'react';
 import './SharePost.css';
 
-const SharePost = () => {
+const SharePost = ({ setUpdated }) => {
+    const { user } = useContext(AuthContext);
+
+    const [formData, setFormData] = useState();
+    const [isPosting, setIsPosting] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+    const [status, setStatus] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsPosting(true);
+        axios
+            .post(
+                'https://api.cloudinary.com/v1_1/dripcloud/image/upload',
+                formData
+            )
+            .then((res) => {
+                setErrorMsg('');
+                const postData = {
+                    userId: user._id,
+                    desc: status,
+                    image: res.data.secure_url,
+                };
+                statusUpload(postData);
+                setStatus('');
+            })
+            .catch((err) => {
+                if (
+                    err.response.data.error.message ===
+                    'Upload preset must be specified when using unsigned upload'
+                ) {
+                    statusUpload({
+                        userId: user._id,
+                        desc: status,
+                    });
+                    setStatus('');
+                    setErrorMsg('');
+                } else {
+                    setErrorMsg('File size too large, maximum is 10MB');
+                }
+                setIsPosting(false);
+            });
+    };
+
+    const statusUpload = (data) => {
+        axios
+            .post('/posts/create', data)
+            .then((res) => {
+                setUpdated(true);
+                setUpdated(false);
+                setIsPosting(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsPosting(false);
+            });
+    };
+    const handleChange = async (e) => {
+        const files = e.target.files;
+
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'test_upload_react');
+
+        setFormData(data);
+    };
+
     return (
         <div className="share-post">
-            <div className="share-wrapper">
+            <form className="share-wrapper" onSubmit={handleSubmit}>
                 <div className="share-top">
                     <img
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                        src={
+                            user.profilePic ||
+                            'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                        }
                         alt=""
                         className="user-pfp"
                     />
@@ -16,8 +89,10 @@ const SharePost = () => {
                         id="status-textbox"
                         cols="50"
                         rows="2"
-                        placeholder="What's on your mind Drip?"
+                        placeholder={`What's on your mind ${user.username}`}
                         maxLength="280"
+                        onChange={(e) => setStatus(e.target.value)}
+                        value={status}
                         autoFocus
                     ></textarea>
                 </div>
@@ -28,11 +103,29 @@ const SharePost = () => {
                             <i className="media-icon fas fa-photo-video"></i>
                         </label>
                         <span className="media-span">Add Photo or Video</span>
-                        <input type="file" name="" id="media-input" />
+                        <input
+                            type="file"
+                            name=""
+                            id="media-input"
+                            onChange={handleChange}
+                        />
                     </div>
-                    <button className="share-btn">Share</button>
+                    <button
+                        className="share-btn"
+                        type="submit"
+                        disabled={isPosting ? true : false}
+                    >
+                        Share
+                        {isPosting && (
+                            <CircularProgress
+                                color="inherit"
+                                style={{ padding: '8px' }}
+                            />
+                        )}
+                    </button>
                 </div>
-            </div>
+                <p>{errorMsg}</p>
+            </form>
         </div>
     );
 };

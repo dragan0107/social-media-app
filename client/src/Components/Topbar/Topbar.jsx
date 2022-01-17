@@ -26,7 +26,7 @@ const Topbar = () => {
                     <a href="">Homepage</a>
                 </Link>
 
-                <a href="">Timeline</a>
+                {/* <a href="">Timeline</a> */}
                 <a className="logout-link" onClick={handleClick}>
                     Log Out
                 </a>

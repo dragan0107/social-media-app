@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './Context/AuthContext';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -11,12 +11,18 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={user ? <Home /> : <Login />} />
-            <Route path="login" element={!user ? <Login /> : <Home />} />
+            <Route
+                path="login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+            />
             <Route
                 path="profile/:username"
-                element={user ? <Profile /> : <Login />}
+                element={user ? <Profile /> : <Navigate to="/login" />}
             />
-            <Route path="register" element={!user ? <Register /> : <Home />} />
+            <Route
+                path="register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+            />
         </Routes>
     );
 }
