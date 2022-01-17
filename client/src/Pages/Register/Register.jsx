@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import './Register.css';
 
 const Register = () => {
-    const { user, isFetching, error, dispatch } = useContext(AuthContext);
+    const { dispatch } = useContext(AuthContext);
 
     const username = useRef();
     const email = useRef();
@@ -22,7 +22,6 @@ const Register = () => {
             registerUser(username, email, password, dispatch);
         }
     };
-    console.log(user);
 
     return (
         <div className="register">

@@ -74,9 +74,43 @@ exports.userLogin = async (req, res) => {
     }
 };
 
-// exports.protect = (req, res, next) => {
-//     console.log(req.headers.authorization);
-//     if (!req.headers.authorization)
-//         return next(new Error('Something went wrong'));
-//     next();
-// };
+exports.protect = async (req, res, next) => {
+    let token;
+
+    //Checks if there is an auth header and if it starts with bearer, and tries to obtain the token
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        token = req.headers.authorization.split(' ')[1];
+    }
+    //If no token, asks user to login again and provide a new token
+    if (!token) {
+        return res.status(404).json({
+            message: 'No token, please login again!',
+        });
+    }
+
+    //token verification
+
+    let decodedToken;
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (!err) {
+            decodedToken = decoded;
+        }
+    });
+    if (decodedToken) {
+        try {
+            await User.findById(decodedToken.id);
+        } catch (error) {
+            return res.status(404).json({
+                message: 'No user with that token.',
+            });
+        }
+    } else {
+        return res.status(404).json({
+            message: 'Invalid token, please login again!',
+        });
+    }
+    next();
+};

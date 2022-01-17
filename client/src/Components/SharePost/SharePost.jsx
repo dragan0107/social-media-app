@@ -13,6 +13,7 @@ const SharePost = ({ setUpdated }) => {
     const [errorMsg, setErrorMsg] = useState('');
     const [status, setStatus] = useState('');
 
+    const inputVal = document.getElementById('media-input');
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsPosting(true);
@@ -29,6 +30,7 @@ const SharePost = ({ setUpdated }) => {
                     image: res.data.secure_url,
                 };
                 statusUpload(postData);
+                inputVal.value = '';
                 setStatus('');
             })
             .catch((err) => {

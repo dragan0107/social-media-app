@@ -11,12 +11,12 @@ const {
     dislikePost,
 } = require('../controllers/postController');
 
-// const { protect } = require('../controllers/authController');
+const { protect } = require('../controllers/authController');
 
 router
     .get('/:postId', getPost)
     .get('/user/:username', getUserPosts)
-    .get('/timeline/:userId', getTimelinePosts)
+    .get('/timeline/:userId', protect, getTimelinePosts)
     .post('/create', addPost)
     .put('/update/:postId', updatePost)
     .delete('/delete/:postId', deletePost)

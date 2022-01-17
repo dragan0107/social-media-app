@@ -34,3 +34,34 @@ export const loginUser = async (username, password, dispatch) => {
         dispatch({ type: 'LOGIN_FAILURE' });
     }
 };
+
+// Fetches the post for timeline or for the user profile page depending on the request.
+export const getPosts = async (usernameURL, user, setPosts, dispatch) => {
+    try {
+        const res = usernameURL
+            ? await axios.get(`/posts/user/${usernameURL}`)
+            : await axios.get(`/posts/timeline/${user._id}`, {
+                  headers: {
+                      authorization: 'Bearer ' + localStorage.getItem('jwt'),
+                  },
+              });
+        setPosts(res.data.allPosts);
+    } catch (error) {
+        if (error.response.status === 404) {
+            dispatch({ type: 'LOGOUT' });
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('user');
+        }
+    }
+};
+
+// Gets user information through the query
+export const getUser = async (usernameURL, post, setUserData) => {
+    try {
+        const res = await axios.get(`/users/?username=${usernameURL}`);
+        // console.log(res);
+        setUserData(res.data);
+    } catch (error) {
+        console.log(error);
+    }
+};

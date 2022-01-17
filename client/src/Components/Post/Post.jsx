@@ -13,7 +13,6 @@ const Post = ({ post, userData }) => {
         const getUser = async () => {
             try {
                 const res = await axios.get(`/users/?userId=${post.userId}`);
-                // console.log(res);
                 setUser(res.data);
             } catch (error) {
                 console.log(error);
@@ -21,6 +20,7 @@ const Post = ({ post, userData }) => {
         };
         if (!userData.username) getUser();
     }, []);
+
     return (
         <div className="post">
             <div className="post-wrapper">
@@ -53,7 +53,7 @@ const Post = ({ post, userData }) => {
                 <div className="post-bottom">
                     <div className="reactions likes">
                         <ThumbUpIcon id="like-icon" />
-                        <span className="likes-number">
+                        <span className="likes-number liked">
                             {post.likes.length}
                         </span>
                     </div>
