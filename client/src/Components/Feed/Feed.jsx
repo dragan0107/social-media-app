@@ -15,7 +15,7 @@ const Feed = ({ usernameURL, profile }) => {
     useEffect(() => {
         getPosts(usernameURL, user, setPosts, dispatch);
         if (usernameURL) getUser(usernameURL, setUserData);
-    }, [updated]);
+    }, [updated, usernameURL]);
     return (
         <div className="feed">
             <div className="feed-wrapper">

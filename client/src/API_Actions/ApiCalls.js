@@ -65,3 +65,14 @@ export const getUser = async (usernameURL, post, setUserData) => {
         console.log(error);
     }
 };
+
+// This function checks if the currently logged user has already reacted to the post and adds styling to the likes or dislikes
+export const reactionChecker = (user, post, setIsLiked, setIsDisliked) => {
+    console.log(user._id);
+    console.log(post.dislikes);
+    if (post.likes.includes(user._id)) {
+        setIsLiked(true);
+    } else if (post.dislikes.includes(user._id)) {
+        setIsDisliked(true);
+    }
+};

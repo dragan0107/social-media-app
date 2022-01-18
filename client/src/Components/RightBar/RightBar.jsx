@@ -3,7 +3,7 @@ import OnlineFriend from '../OnlineFriend/OnlineFriend';
 import ProfileFriend from '../ProfileFriend/ProfileFriend';
 import './RightBar.css';
 
-const RightBar = ({ profile, user }) => {
+const RightBar = ({ profile, userInfo }) => {
     const HomeRightbar = () => {
         return (
             <>
@@ -36,6 +36,7 @@ const RightBar = ({ profile, user }) => {
     };
 
     const ProfileRightbar = () => {
+        console.log(userInfo);
         return (
             <>
                 <div className="profile-rightbar-wrapper">
@@ -45,13 +46,13 @@ const RightBar = ({ profile, user }) => {
                         <div className="info-item">
                             <span className="info-first">Living in: </span>
                             <span className="user-city">
-                                {user.city || <i>User did not specify.</i>}
+                                {userInfo.city || <i>User did not specify.</i>}
                             </span>
                         </div>
                         <div className="info-item">
                             <span className="info-first">From:</span>
                             <span className="user-city">
-                                {user.from || <i>User did not specify.</i>}
+                                {userInfo.from || <i>User did not specify.</i>}
                             </span>
                         </div>
                         <div className="info-item">
@@ -64,17 +65,10 @@ const RightBar = ({ profile, user }) => {
                     <h4 className="friends-tag">Friends</h4>
                     <div className="user-info-line"></div>
                     <section className="user-friends">
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
-                        <ProfileFriend />
+                        {userInfo.followers &&
+                            userInfo.followers.map((el) => (
+                                <ProfileFriend friendId={el} />
+                            ))}
                     </section>
                 </div>
             </>

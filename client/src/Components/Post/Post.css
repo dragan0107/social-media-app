@@ -96,9 +96,13 @@
     font-size: 1.15rem;
 }
 
-.liked, .disliked {
+.liked {
     font-weight: 900;
     color: rgb(65, 65, 241);
+}
+.disliked {
+    font-weight: 900;
+    color: rgb(241, 65, 74);
 }
 
 #like-icon:hover {

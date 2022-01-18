@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const ProfileFriend = () => {
+const ProfileFriend = ({ friendId }) => {
+    const [friend, setFriend] = useState({});
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get(`/users/?userId=${friendId}`);
+                setFriend(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getUser();
+    }, []);
     return (
         <div className="single-friend">
-            <img
-                src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-                alt=""
-                className="user-friend-img"
-            />
-            <span className="user-friend-name">John Doe</span>
+            <Link to={`/profile/${friend.username}`}>
+                <img
+                    src={
+                        friend.profilePic ||
+                        'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                    }
+                    alt=""
+                    className="user-friend-img"
+                />
+            </Link>
+            <span className="user-friend-name">{friend.username}</span>
         </div>
     );
 };
