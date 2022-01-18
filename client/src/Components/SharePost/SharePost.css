@@ -7,7 +7,8 @@
     background-color: white;
     -webkit-box-shadow: 3px 3px 16px 4px #D9D9D9; 
     box-shadow: 3px 3px 16px 4px #D9D9D9;
-    height: 10.9em;
+    padding: 1.3em 0;
+    /* height: 12em; */
     border-radius: 10px;
     font-family: 'Ubuntu', sans-serif;
     margin: 3% 0 2% 0;
@@ -55,8 +56,8 @@ input[type=file]::-webkit-file-upload-button {
 .media-span {
     margin-left: 6px;
     margin-right: 5px;
-    font-size: .8em;
-    font-weight: bold;
+    font-size: 1em;
+    font-weight: 400;
 }
 
 #status-textbox {
@@ -102,6 +103,10 @@ input[type=file]::-webkit-file-upload-button {
     background-color: #0c2861d8;
 }
 
+.error-notification {
+    font-weight: 600;
+    color: rgb(231, 59, 59);
+}
 
 .media-icon {
     font-size: 1.5rem;

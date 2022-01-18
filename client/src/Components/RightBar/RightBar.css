@@ -121,7 +121,7 @@
     height: 100px;
     width: 100px;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 7px;
 }
 
 .rightbar-info h4 {

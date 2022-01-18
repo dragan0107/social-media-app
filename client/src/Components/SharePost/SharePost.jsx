@@ -31,6 +31,7 @@ const SharePost = ({ setUpdated }) => {
                 };
                 statusUpload(postData);
                 inputVal.value = '';
+                setFormData();
                 setStatus('');
             })
             .catch((err) => {
@@ -38,12 +39,16 @@ const SharePost = ({ setUpdated }) => {
                     err.response.data.error.message ===
                     'Upload preset must be specified when using unsigned upload'
                 ) {
-                    statusUpload({
-                        userId: user._id,
-                        desc: status,
-                    });
-                    setStatus('');
-                    setErrorMsg('');
+                    if (status) {
+                        statusUpload({
+                            userId: user._id,
+                            desc: status,
+                        });
+                        setStatus('');
+                        setErrorMsg('');
+                    } else {
+                        setErrorMsg('Add image or enter status!');
+                    }
                 } else {
                     setErrorMsg('File size too large, maximum is 10MB');
                 }
@@ -126,7 +131,7 @@ const SharePost = ({ setUpdated }) => {
                         )}
                     </button>
                 </div>
-                <p>{errorMsg}</p>
+                <p className="error-notification">{errorMsg}</p>
             </form>
         </div>
     );
