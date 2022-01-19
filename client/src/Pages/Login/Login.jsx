@@ -30,7 +30,7 @@ const Login = () => {
                 <div className="login-right">
                     <form
                         action=""
-                        className="right-wrapper"
+                        className="right-wrapper-login"
                         onSubmit={handleSubmit}
                     >
                         <h1 className="welcome-back">Welcome back!</h1>

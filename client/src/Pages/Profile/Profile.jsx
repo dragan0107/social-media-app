@@ -6,23 +6,26 @@ import RightBar from '../../Components/RightBar/RightBar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import Topbar from '../../Components/Topbar/Topbar';
 import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Profile = () => {
+    const { user } = useContext(AuthContext);
     const usernameURL = useParams().username; // this username is from profile url
-    const [user, setUser] = useState({});
+    const [foundUser, setFoundUser] = useState({});
 
     useEffect(() => {
         const getUser = async () => {
             try {
                 const res = await axios.get(`/users/?username=${usernameURL}`);
 
-                setUser(res.data);
+                setFoundUser(res.data);
             } catch (error) {
                 console.log(error);
             }
         };
         getUser();
-    }, [usernameURL]);
+    }, [usernameURL, foundUser]);
     return (
         <div>
             <Topbar />
@@ -34,7 +37,7 @@ const Profile = () => {
                             <img
                                 className="profile-cover-img"
                                 src={
-                                    user.coverPic ||
+                                    foundUser.coverPic ||
                                     'https://a.cdn-hotels.com/gdcs/production103/d1782/cad3ba60-fe12-11e8-85c5-0242ac110002.jpg'
                                 }
                                 alt=""
@@ -42,7 +45,7 @@ const Profile = () => {
                             <img
                                 className="profile-user-img"
                                 src={
-                                    user.profilePic ||
+                                    foundUser.profilePic ||
                                     'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
                                 }
                                 alt=""
@@ -50,10 +53,10 @@ const Profile = () => {
                         </div>
                         <div className="profile-info">
                             <h4 className="profile-user-name">
-                                {user.username}
+                                {foundUser.username}
                             </h4>
                             <span className="profile-desc">
-                                {user.desc || (
+                                {foundUser.desc || (
                                     <i>
                                         User hasn't added any additional
                                         information yet...
@@ -64,7 +67,12 @@ const Profile = () => {
                     </div>
                     <div className="profile-right-bottom">
                         <Feed usernameURL={usernameURL} profile={true} />
-                        <RightBar userInfo={user} profile={true} />
+                        <RightBar
+                            userInfo={foundUser}
+                            usernameURL={usernameURL} //user from the profile url
+                            profile={true}
+                            loggedUser={user}
+                        />
                     </div>
                 </div>
             </div>

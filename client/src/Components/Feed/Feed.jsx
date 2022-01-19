@@ -8,6 +8,7 @@ import { AuthContext } from '../../Context/AuthContext';
 
 const Feed = ({ usernameURL, profile }) => {
     const { user, dispatch } = useContext(AuthContext);
+
     const [posts, setPosts] = useState([]);
     const [userData, setUserData] = useState({});
     const [updated, setUpdated] = useState(false);

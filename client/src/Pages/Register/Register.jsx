@@ -35,7 +35,7 @@ const Register = () => {
                 </div>
                 <div className="register-right">
                     <form
-                        className="right-wrapper"
+                        className="right-wrapper-register"
                         action=""
                         onSubmit={handleSubmit}
                     >

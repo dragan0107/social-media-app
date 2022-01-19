@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
 import OnlineFriend from '../OnlineFriend/OnlineFriend';
 import ProfileFriend from '../ProfileFriend/ProfileFriend';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import './RightBar.css';
+import { AuthContext } from '../../Context/AuthContext';
+import PersonAddAlt1 from '@mui/icons-material/PersonAddAlt1';
 
-const RightBar = ({ profile, userInfo }) => {
+const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
+    const { user } = useContext(AuthContext);
+    const [isFollowing, setIsFollowing] = useState(false);
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get(`/users/?username=${usernameURL}`);
+                if (res.data.followers.includes(user._id)) {
+                    setIsFollowing(true);
+                } else {
+                    setIsFollowing(false);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getUser();
+    }, [isFollowing]);
+
     const HomeRightbar = () => {
         return (
             <>
@@ -36,11 +59,43 @@ const RightBar = ({ profile, userInfo }) => {
     };
 
     const ProfileRightbar = () => {
-        console.log(userInfo);
+        const handleClick = () => {
+            if (isFollowing) {
+                axios.put(`/users/${userInfo._id}/unfollow`, {
+                    userId: user._id,
+                });
+                setIsFollowing(false);
+            } else {
+                axios.put(`/users/${userInfo._id}/follow`, {
+                    userId: user._id,
+                });
+                setIsFollowing(true);
+            }
+        };
         return (
             <>
                 <div className="profile-rightbar-wrapper">
                     <section className="rightbar-info">
+                        {usernameURL !== loggedUser.username && !isFollowing && (
+                            <button
+                                id="add-friend-btn"
+                                className="follow-btn"
+                                onClick={handleClick}
+                            >
+                                Follow
+                                <PersonAddAlt1 />
+                            </button>
+                        )}
+                        {usernameURL !== loggedUser.username && isFollowing && (
+                            <button
+                                id="add-friend-btn"
+                                className="follow-btn"
+                                onClick={handleClick}
+                            >
+                                Unfollow
+                                <PersonRemoveIcon />
+                            </button>
+                        )}
                         <h4>User information</h4>
                         <div className="user-info-line"></div>
                         <div className="info-item">
