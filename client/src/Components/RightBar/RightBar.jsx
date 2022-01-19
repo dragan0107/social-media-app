@@ -8,13 +8,21 @@ import './RightBar.css';
 import { AuthContext } from '../../Context/AuthContext';
 import PersonAddAlt1 from '@mui/icons-material/PersonAddAlt1';
 
-const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
+const RightBar = ({
+    profile,
+    userInfo,
+    usernameURL,
+    loggedUser,
+    setFollowUnfollow,
+}) => {
     const { user } = useContext(AuthContext);
     const [isFollowing, setIsFollowing] = useState(false);
+    const [friends, setFriends] = useState([]);
     useEffect(() => {
         const getUser = async () => {
             try {
                 const res = await axios.get(`/users/?username=${usernameURL}`);
+                setFriends(res.data.followers);
                 if (res.data.followers.includes(user._id)) {
                     setIsFollowing(true);
                 } else {
@@ -25,7 +33,7 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
             }
         };
         getUser();
-    }, [isFollowing]);
+    }, [isFollowing, usernameURL]);
 
     const HomeRightbar = () => {
         return (
@@ -78,7 +86,6 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
                     <section className="rightbar-info">
                         {usernameURL !== loggedUser.username && !isFollowing && (
                             <button
-                                id="add-friend-btn"
                                 className="follow-btn"
                                 onClick={handleClick}
                             >
@@ -88,7 +95,6 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
                         )}
                         {usernameURL !== loggedUser.username && isFollowing && (
                             <button
-                                id="add-friend-btn"
                                 className="follow-btn"
                                 onClick={handleClick}
                             >
@@ -120,8 +126,8 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
                     <h4 className="friends-tag">Friends</h4>
                     <div className="user-info-line"></div>
                     <section className="user-friends">
-                        {userInfo.followers &&
-                            userInfo.followers.map((el) => (
+                        {friends &&
+                            friends.map((el) => (
                                 <ProfileFriend friendId={el} />
                             ))}
                     </section>

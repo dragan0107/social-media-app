@@ -25,7 +25,7 @@ const Profile = () => {
             }
         };
         getUser();
-    }, [usernameURL, foundUser]);
+    }, [usernameURL]);
     return (
         <div>
             <Topbar />
