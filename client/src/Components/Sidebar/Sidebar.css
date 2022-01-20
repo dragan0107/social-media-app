@@ -87,6 +87,10 @@
     border: bottom .5px #333;
 }
 
+.close-friends {
+    font-weight: 600;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }

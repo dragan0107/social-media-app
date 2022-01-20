@@ -27,6 +27,7 @@ const Sidebar = () => {
                     <span className="icon-span">Pages</span>
                 </li>
             </ul>
+            <span className="close-friends">Close friends</span>
             <hr className="sidebar-hr" />
             <ul className="friends-list-sidebar">
                 <CloseFriend />

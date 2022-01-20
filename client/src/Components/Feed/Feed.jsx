@@ -5,16 +5,18 @@ import { getPosts, getUser } from '../../API_Actions/ApiCalls';
 import './Feed.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import { CircularProgress } from '@mui/material';
 
 const Feed = ({ usernameURL, profile }) => {
     const { user, dispatch } = useContext(AuthContext);
-
     const [posts, setPosts] = useState([]);
     const [userData, setUserData] = useState({});
     const [updated, setUpdated] = useState(false);
+    const [postsFetching, setPostsFetching] = useState(false);
 
     useEffect(() => {
-        getPosts(usernameURL, user, setPosts, dispatch);
+        getPosts(usernameURL, user, setPosts, dispatch, setPostsFetching);
+
         if (usernameURL) getUser(usernameURL, setUserData);
     }, [updated, usernameURL]);
     return (
@@ -24,9 +26,13 @@ const Feed = ({ usernameURL, profile }) => {
                     <SharePost setUpdated={setUpdated} />
                 )}
                 {!profile && <SharePost setUpdated={setUpdated} />}
-                {posts.map((post) => (
-                    <Post key={post._id} post={post} userData={userData} />
-                ))}
+                {postsFetching ? (
+                    <CircularProgress className="spinner-feed" />
+                ) : (
+                    posts.map((post) => (
+                        <Post key={post._id} post={post} userData={userData} />
+                    ))
+                )}
             </div>
         </div>
     );

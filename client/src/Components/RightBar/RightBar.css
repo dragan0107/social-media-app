@@ -162,3 +162,13 @@
 .follow-btn:hover {
     background-color: #224ca0;
 }
+
+.spinner-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.spinner {
+    margin-right: 20%;
+}

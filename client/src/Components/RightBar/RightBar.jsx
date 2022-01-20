@@ -4,25 +4,22 @@ import OnlineFriend from '../OnlineFriend/OnlineFriend';
 import ProfileFriend from '../ProfileFriend/ProfileFriend';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import CircularProgress from '@mui/material/CircularProgress';
 import './RightBar.css';
 import { AuthContext } from '../../Context/AuthContext';
-import PersonAddAlt1 from '@mui/icons-material/PersonAddAlt1';
 
-const RightBar = ({
-    profile,
-    userInfo,
-    usernameURL,
-    loggedUser,
-    setFollowUnfollow,
-}) => {
+const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
     const { user } = useContext(AuthContext);
     const [isFollowing, setIsFollowing] = useState(false);
     const [friends, setFriends] = useState([]);
+    const [isFetching, setIsFetching] = useState(false);
     useEffect(() => {
         const getUser = async () => {
+            setIsFetching(true);
             try {
                 const res = await axios.get(`/users/?username=${usernameURL}`);
                 setFriends(res.data.followers);
+                setIsFetching(false);
                 if (res.data.followers.includes(user._id)) {
                     setIsFollowing(true);
                 } else {
@@ -90,7 +87,7 @@ const RightBar = ({
                                 onClick={handleClick}
                             >
                                 Follow
-                                <PersonAddAlt1 />
+                                <PersonAddAlt1Icon />
                             </button>
                         )}
                         {usernameURL !== loggedUser.username && isFollowing && (
@@ -126,10 +123,13 @@ const RightBar = ({
                     <h4 className="friends-tag">Friends</h4>
                     <div className="user-info-line"></div>
                     <section className="user-friends">
-                        {friends &&
-                            friends.map((el) => (
-                                <ProfileFriend friendId={el} />
-                            ))}
+                        {isFetching ? (
+                            <div className="spinner-box">
+                                <CircularProgress className="spinner" />
+                            </div>
+                        ) : (
+                            friends.map((el) => <ProfileFriend friendId={el} />)
+                        )}
                     </section>
                 </div>
             </>

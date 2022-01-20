@@ -36,8 +36,15 @@ export const loginUser = async (username, password, dispatch) => {
 };
 
 // Fetches the post for timeline or for the user profile page depending on the request.
-export const getPosts = async (usernameURL, user, setPosts, dispatch) => {
+export const getPosts = async (
+    usernameURL,
+    user,
+    setPosts,
+    dispatch,
+    setPostsFetching
+) => {
     try {
+        setPostsFetching(true);
         const res = usernameURL
             ? await axios.get(`/posts/user/${usernameURL}`)
             : await axios.get(`/posts/timeline/${user._id}`, {
@@ -46,6 +53,7 @@ export const getPosts = async (usernameURL, user, setPosts, dispatch) => {
                   },
               });
         setPosts(res.data.allPosts);
+        setPostsFetching(false);
     } catch (error) {
         if (error.response.status === 404) {
             dispatch({ type: 'LOGOUT' });
@@ -56,7 +64,7 @@ export const getPosts = async (usernameURL, user, setPosts, dispatch) => {
 };
 
 // Gets user information through the query
-export const getUser = async (usernameURL, post, setUserData) => {
+export const getUser = async (usernameURL, setUserData) => {
     try {
         const res = await axios.get(`/users/?username=${usernameURL}`);
         // console.log(res);
