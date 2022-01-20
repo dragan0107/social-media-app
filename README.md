@@ -1,8 +1,24 @@
 # **Social Media App**
 
--   Social media app project in **_MERN_** stack. This is where I'm practicing and improving my Front and Back-end skills and the README will be updated along the way.
+-   Social media app project (Friendbook) in **_MERN_** stack. This is NOT a tutorial copy but It's totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills. All the guidance I've had is Google, and taking a look on some examples for design.
 
 ---
+
+## **Currently implemented functionalities:**
+-   [x] User registration/login (JWT Authentication).
+-   [x] Adding status, with or without an image/GIF;
+-   [x] Images are uploaded on a cloud (Cloudinary) service;
+-   [x] Like/Dislike;
+-   [x] Follow/Unfollow users;
+
+---
+
+## **Functionalities soon to come:**
+
+-   [ ] Delete posts;
+-   [ ] Edit profile directly from the page;
+-   [ ] Sockets for chat;
+-   [ ] Add favorite (close) friends;
 
 ## **To-Do list**
 
@@ -21,15 +37,20 @@
 
 ### _Home Page_
 
-![Screenshot_1](https://user-images.githubusercontent.com/73792907/149223932-0cd1ffb4-ffe9-4fef-b745-dcf618433213.jpg)
+![Screenshot_6](https://user-images.githubusercontent.com/73792907/150241854-057ddb4c-2198-4b09-897f-aaf80085386b.jpg)
 
 ---
 
 ### _Profile Page_
 
-![Screenshot_2](https://user-images.githubusercontent.com/73792907/149223933-cca57f46-1d64-4bbe-870d-8b220c68d865.jpg)
+![Screenshot_7](https://user-images.githubusercontent.com/73792907/150241800-596d2d39-7a98-4504-a5c1-364b3155ac18.jpg)
 
 ---
+
+### _ We can follow/unfollow users
+
+![Screenshot_8](https://user-images.githubusercontent.com/73792907/150242435-fe6cd70d-26f9-44be-8a3c-bd29fb1fd14b.jpg)
+
 
 ### _Register and Login_
 
