@@ -9,7 +9,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Post = ({ post, userData }) => {
+const Post = ({ post, userData, profileChange }) => {
     const { user } = useContext(AuthContext);
     const [postAuthor, setPostAuthor] = useState({});
     const [likes, setLikes] = useState(post.likes.length);
@@ -25,8 +25,8 @@ const Post = ({ post, userData }) => {
                 console.log(error);
             }
         };
-        if (!userData.username) getUser();
-    }, []);
+        if (!userData.username || profileChange === true) getUser();
+    }, [profileChange]);
 
     const handleLike = async () => {
         try {

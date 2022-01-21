@@ -8,11 +8,13 @@ import Topbar from '../../Components/Topbar/Topbar';
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
     const usernameURL = useParams().username; // this username is from profile url
     const [foundUser, setFoundUser] = useState({});
+    const [profileChange, setProfileChange] = useState(false);
 
     useEffect(() => {
         const getUser = async () => {
@@ -25,7 +27,33 @@ const Profile = () => {
             }
         };
         getUser();
-    }, [usernameURL]);
+    }, [usernameURL, profileChange]);
+
+    const handleChange = (e) => {
+        const files = e.target.files;
+
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'test_upload_react');
+
+        axios
+            .post(
+                'https://api.cloudinary.com/v1_1/dripcloud/image/upload',
+                data
+            )
+            .then((res) => {
+                axios
+                    .put(`/users/${user._id}`, {
+                        userId: user._id,
+                        profilePic: res.data.secure_url,
+                    })
+                    .then(() => {
+                        setProfileChange(true);
+                        user.profilePic = res.data.secure_url;
+                        setProfileChange(false);
+                    });
+            });
+    };
     return (
         <div>
             <Topbar />
@@ -42,14 +70,34 @@ const Profile = () => {
                                 }
                                 alt=""
                             />
-                            <img
-                                className="profile-user-img"
-                                src={
-                                    foundUser.profilePic ||
-                                    'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
-                                }
-                                alt=""
-                            />
+                            <div className="pfp-box">
+                                <img
+                                    className={
+                                        'profile-user-img ' +
+                                        (foundUser._id === user._id
+                                            ? 'transparent-pfp'
+                                            : '')
+                                    }
+                                    src={
+                                        foundUser.profilePic ||
+                                        'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                                    }
+                                    alt=""
+                                />
+                                {usernameURL === user.username && (
+                                    <div className="upload-pfp-box">
+                                        <label className="upload-tag">
+                                            Upload Image <AddAPhotoIcon />
+                                            <input
+                                                type="file"
+                                                name=""
+                                                id=""
+                                                onChange={handleChange}
+                                            />
+                                        </label>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className="profile-info">
                             <h4 className="profile-user-name">
@@ -66,7 +114,11 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="profile-right-bottom">
-                        <Feed usernameURL={usernameURL} profile={true} />
+                        <Feed
+                            usernameURL={usernameURL}
+                            profile={true}
+                            profileChange={profileChange}
+                        />
                         <RightBar
                             userInfo={foundUser}
                             usernameURL={usernameURL} //user from the profile url

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { CircularProgress } from '@mui/material';
 
-const Feed = ({ usernameURL, profile }) => {
+const Feed = ({ usernameURL, profile, profileChange }) => {
     const { user, dispatch } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
     const [userData, setUserData] = useState({});
@@ -30,7 +30,12 @@ const Feed = ({ usernameURL, profile }) => {
                     <CircularProgress className="spinner-feed" />
                 ) : (
                     posts.map((post) => (
-                        <Post key={post._id} post={post} userData={userData} />
+                        <Post
+                            key={post._id}
+                            post={post}
+                            userData={userData}
+                            profileChange={profileChange}
+                        />
                     ))
                 )}
             </div>
