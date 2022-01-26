@@ -28,6 +28,16 @@ const Feed = ({ usernameURL, profile, profileChange }) => {
                 {!profile && <SharePost setUpdated={setUpdated} />}
                 {postsFetching ? (
                     <CircularProgress className="spinner-feed" />
+                ) : usernameURL ? (
+                    posts.map((post) => (
+                        <Post
+                            key={post._id}
+                            post={post}
+                            userData={userData}
+                            profileChange={profileChange}
+                            usernameURL={usernameURL}
+                        />
+                    ))
                 ) : (
                     posts.map((post) => (
                         <Post

@@ -61,7 +61,7 @@
     z-index: 110;
     opacity: 0;
 }
-input[type="file"] {
+.pfp-upload-btn {
     display: none;
 }
 

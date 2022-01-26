@@ -47,9 +47,10 @@ const Profile = () => {
                         userId: user._id,
                         profilePic: res.data.secure_url,
                     })
-                    .then(() => {
+                    .then((updatedRes) => {
+                        user.profilePic =
+                            updatedRes.data.updatedUser.profilePic;
                         setProfileChange(true);
-                        user.profilePic = res.data.secure_url;
                         setProfileChange(false);
                     });
             });
@@ -89,6 +90,7 @@ const Profile = () => {
                                         <label className="upload-tag">
                                             Upload Image <AddAPhotoIcon />
                                             <input
+                                                className="pfp-upload-btn"
                                                 type="file"
                                                 name=""
                                                 id=""

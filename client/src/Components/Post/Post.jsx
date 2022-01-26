@@ -9,7 +9,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Post = ({ post, userData, profileChange }) => {
+const Post = ({ post, userData, profileChange, usernameURL }) => {
     const { user } = useContext(AuthContext);
     const [postAuthor, setPostAuthor] = useState({});
     const [likes, setLikes] = useState(post.likes.length);
@@ -82,10 +82,13 @@ const Post = ({ post, userData, profileChange }) => {
                         <img
                             className="post-pfp"
                             src={
-                                userData.profilePic || postAuthor.profilePic
+                                !usernameURL
                                     ? userData.profilePic ||
                                       postAuthor.profilePic
-                                    : 'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                                        ? userData.profilePic ||
+                                          postAuthor.profilePic
+                                        : 'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                                    : user.profilePic
                             }
                             alt=""
                         />

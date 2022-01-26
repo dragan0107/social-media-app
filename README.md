@@ -5,6 +5,7 @@
 ---
 
 ## **Currently implemented functionalities:**
+
 -   [x] User registration/login (JWT Authentication).
 -   [x] Adding status, with or without an image/GIF;
 -   [x] Images are uploaded on a cloud (Cloudinary) service;
@@ -19,6 +20,7 @@
 -   [ ] Edit profile directly from the page;
 -   [ ] Sockets for chat;
 -   [ ] Add favorite (close) friends;
+-   [ ] Search for users by their username;
 
 ## **To-Do list**
 
@@ -47,10 +49,9 @@
 
 ---
 
-### _ We can follow/unfollow users
+### \_ We can follow/unfollow users
 
 ![Screenshot_8](https://user-images.githubusercontent.com/73792907/150242435-fe6cd70d-26f9-44be-8a3c-bd29fb1fd14b.jpg)
-
 
 ### _Register and Login_
 
