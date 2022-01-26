@@ -79,19 +79,27 @@ const Post = ({ post, userData, profileChange, usernameURL }) => {
                             postAuthor.username || userData.username
                         }`}
                     >
-                        <img
-                            className="post-pfp"
-                            src={
-                                !usernameURL
-                                    ? userData.profilePic ||
-                                      postAuthor.profilePic
+                        {usernameURL === user.username ? (
+                            <img
+                                className="post-pfp"
+                                src={
+                                    user.profilePic ||
+                                    'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
+                                }
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className="post-pfp"
+                                src={
+                                    userData.profilePic || postAuthor.profilePic
                                         ? userData.profilePic ||
                                           postAuthor.profilePic
                                         : 'https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg'
-                                    : user.profilePic
-                            }
-                            alt=""
-                        />
+                                }
+                                alt=""
+                            />
+                        )}
                     </Link>
                     <span className="post-author">
                         {userData.username || postAuthor.username}
