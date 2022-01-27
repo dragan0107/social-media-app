@@ -85,7 +85,6 @@ exports.protect = async (req, res, next) => {
         token = req.headers.authorization.split(' ')[1];
     }
     //If no token, asks user to login again and provide a new token
-    console.log(token);
     if (!token) {
         return res.status(404).json({
             message: 'No token, please login again!',
