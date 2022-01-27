@@ -36,6 +36,7 @@ const Feed = ({ usernameURL, profile, profileChange }) => {
                             userData={userData}
                             profileChange={profileChange}
                             usernameURL={usernameURL}
+                            setUpdated={setUpdated}
                         />
                     ))
                 ) : (
@@ -45,6 +46,7 @@ const Feed = ({ usernameURL, profile, profileChange }) => {
                             post={post}
                             userData={userData}
                             profileChange={profileChange}
+                            setUpdated={setUpdated}
                         />
                     ))
                 )}

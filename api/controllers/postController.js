@@ -47,16 +47,10 @@ exports.updatePost = async (req, res) => {
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
-        if (post.userId === req.body.userId) {
-            post.deleteOne();
-            res.status(200).json({
-                message: 'Successfully deleted the post.',
-            });
-        } else {
-            res.status(401).json({
-                message: 'You can not delete other peoples posts.',
-            });
-        }
+        post.deleteOne();
+        res.status(200).json({
+            message: 'Successfully deleted the post.',
+        });
     } catch (error) {
         res.status(400).json({
             message: 'Something went wrong, please try again.',

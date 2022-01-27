@@ -9,13 +9,15 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Post = ({ post, userData, profileChange, usernameURL }) => {
+const Post = ({ post, userData, profileChange, usernameURL, setUpdated }) => {
     const { user } = useContext(AuthContext);
     const [postAuthor, setPostAuthor] = useState({});
     const [likes, setLikes] = useState(post.likes.length);
     const [dislikes, setDislikes] = useState(post.dislikes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
+    const [showDel, setShowDel] = useState(false);
+
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -66,10 +68,29 @@ const Post = ({ post, userData, profileChange, usernameURL }) => {
         }
     };
 
+    const handleDelete = async () => {
+        if (postAuthor.username === user.username) {
+            try {
+                await axios.delete(`/posts/delete/${post._id}`, {
+                    headers: {
+                        authorization: 'Bearer ' + localStorage.getItem('jwt'),
+                    },
+                });
+                setUpdated(true);
+                setUpdated(false);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
     useEffect(() => {
         reactionChecker(user, post, setIsLiked, setIsDisliked);
     }, []);
 
+    const openDel = () => {
+        setShowDel((prevValue) => setShowDel(!prevValue));
+    };
     return (
         <div className="post">
             <div className="post-wrapper">
@@ -107,7 +128,18 @@ const Post = ({ post, userData, profileChange, usernameURL }) => {
                     <span className="post-created">
                         {format(post.createdAt)}
                     </span>
-                    <MoreVertIcon className="dots-icon" />
+                    {postAuthor.username === user.username && (
+                        <MoreVertIcon className="dots-icon" onClick={openDel} />
+                    )}
+                    {showDel && (
+                        <div className="delete-box">
+                            <div className="delete-wrapper">
+                                <p className="delete-p" onClick={handleDelete}>
+                                    Delete
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="post-mid">
                     <p className="post-desc">{post.desc}</p>
