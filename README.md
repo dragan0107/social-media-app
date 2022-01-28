@@ -11,12 +11,13 @@
 -   [x] Images are uploaded on a cloud (Cloudinary) service;
 -   [x] Like/Dislike;
 -   [x] Follow/Unfollow users;
+-   [x] Delete posts;
+-   [x] Update profile picture;
 
 ---
 
 ## **Functionalities soon to come:**
 
--   [ ] Delete posts;
 -   [ ] Edit profile directly from the page;
 -   [ ] Sockets for chat;
 -   [ ] Add favorite (close) friends;
