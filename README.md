@@ -1,6 +1,6 @@
 # **Social Media App**
 
--   Social media app project (Friendbook) in **_MERN_** stack. This is NOT a tutorial copy but It's totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills. All the guidance I've had is Google, and taking a look on some examples for design.
+-   Social media app project (Friendbook) in **_MERN_** **_(MongoDB (mongoose), Express, React, Node.js)_** stack. This is NOT a tutorial copy but It's totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills. All the guidance I've had is Google, and taking a look on some examples for design.
 
 ---
 
@@ -13,12 +13,12 @@
 -   [x] Follow/Unfollow users;
 -   [x] Delete posts;
 -   [x] Update profile picture;
+-   [x] Update profile information from the **_Settings_** page;
 
 ---
 
 ## **Functionalities soon to come:**
 
--   [ ] Edit profile directly from the page;
 -   [ ] Sockets for chat;
 -   [ ] Add favorite (close) friends;
 -   [ ] Search for users by their username;

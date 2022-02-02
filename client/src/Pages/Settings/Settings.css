@@ -77,3 +77,8 @@
 .settings-btn:hover {
     background-color: rgb(21, 121, 21);
 }
+
+.update-header {
+    text-align: center;
+    margin-bottom: 1em;
+}

@@ -27,6 +27,7 @@ exports.updateUser = async (req, res) => {
                 return res.status(400).json({
                     message: 'Something went wrong.',
                 });
+                console.log(error);
             }
         }
         try {
@@ -47,6 +48,7 @@ exports.updateUser = async (req, res) => {
             res.status(500).json({
                 message: 'Something went wrong.',
             });
+            console.log(error);
         }
     }
 };

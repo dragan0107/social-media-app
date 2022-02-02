@@ -7,19 +7,19 @@ import axios from 'axios';
 import './Settings.css';
 
 const Settings = () => {
-    const { user } = useContext(AuthContext);
+    const { user, dispatch } = useContext(AuthContext);
     const pass = useRef();
     const passConfirm = useRef();
     const [errorMsg, setErrorMsg] = useState('');
 
     const [formValues, setFormValues] = useState({
-        username: '',
-        email: '',
-        password: '',
-        city: '',
-        from: '',
-        desc: '',
-        relationship: '',
+        userId: `${user._id}`,
+        username: `${user.username}`,
+        email: `${user.email}`,
+        city: `${user.city}`,
+        from: `${user.from}`,
+        desc: `${user.desc}`,
+        relationship: `${user.relationship}` || 1,
     });
 
     const handleChange = (e) => {
@@ -30,11 +30,21 @@ const Settings = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (pass.current.value !== passConfirm.current.value) {
             setErrorMsg('Passwords do not match.');
         } else {
+            if (pass.current.value) formValues.password = pass.current.value;
+            try {
+                const res = await axios.put(`/users/${user._id}`, formValues);
+                dispatch({
+                    type: 'LOGIN_SUCCESS',
+                    payload: res.data.updatedUser,
+                });
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
@@ -45,6 +55,7 @@ const Settings = () => {
                 <Sidebar />
                 <div className="settings-right">
                     <div className="settings-box">
+                        <h1 className="update-header">Update your profile.</h1>
                         <form action="" onSubmit={handleSubmit}>
                             <div className="pair top-pair">
                                 <span>Username</span>
@@ -73,7 +84,6 @@ const Settings = () => {
                                     type="password"
                                     minLength={6}
                                     name="password"
-                                    onChange={handleChange}
                                     ref={pass}
                                 />
                             </div>
