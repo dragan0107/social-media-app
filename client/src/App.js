@@ -5,6 +5,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Profile from './Pages/Profile/Profile';
 import Register from './Pages/Register/Register';
+import Settings from './Pages/Settings/Settings';
 
 function App() {
     const { user } = useContext(AuthContext);
@@ -22,6 +23,10 @@ function App() {
             <Route
                 path="register"
                 element={!user ? <Register /> : <Navigate to="/" />}
+            />
+            <Route
+                path="settings"
+                element={user ? <Settings /> : <Navigate to="/" />}
             />
         </Routes>
     );

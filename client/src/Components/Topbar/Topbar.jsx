@@ -89,8 +89,7 @@ const Topbar = () => {
                                 <div className="menu-box">
                                     <ul className="option-list">
                                         <li>
-                                            {' '}
-                                            <AccountCircleIcon />{' '}
+                                            <AccountCircleIcon />
                                             <Link
                                                 to={`/profile/${user.username}`}
                                             >
@@ -98,7 +97,10 @@ const Topbar = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Settings /> <span>Settings</span>
+                                            <Settings />
+                                            <Link to={`/settings`}>
+                                                <span>Settings</span>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
