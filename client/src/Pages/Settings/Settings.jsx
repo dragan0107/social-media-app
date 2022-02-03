@@ -5,12 +5,15 @@ import Topbar from '../../Components/Topbar/Topbar';
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 import './Settings.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Settings = () => {
     const { user, dispatch } = useContext(AuthContext);
     const pass = useRef();
     const passConfirm = useRef();
     const [errorMsg, setErrorMsg] = useState('');
+    const [successUpdate, setSuccessUpdate] = useState('');
+    const navigate = useNavigate();
 
     const [formValues, setFormValues] = useState({
         userId: `${user._id}`,
@@ -34,6 +37,7 @@ const Settings = () => {
         e.preventDefault();
         if (pass.current.value !== passConfirm.current.value) {
             setErrorMsg('Passwords do not match.');
+            setSuccessUpdate('');
         } else {
             if (pass.current.value) formValues.password = pass.current.value;
             try {
@@ -42,6 +46,11 @@ const Settings = () => {
                     type: 'LOGIN_SUCCESS',
                     payload: res.data.updatedUser,
                 });
+                setSuccessUpdate('Successfully updated the information.');
+                setErrorMsg('');
+                setTimeout(() => {
+                    navigate(`/profile/${user.username}`);
+                }, 1300);
             } catch (error) {
                 console.log(error);
             }
@@ -139,9 +148,14 @@ const Settings = () => {
                                     onChange={handleChange}
                                 />
                             </div>
-                            <button className="settings-btn" type="submit">
-                                Submit Changes
-                            </button>
+                            <div className="submit-box">
+                                <span className="info-span">
+                                    {errorMsg || successUpdate}
+                                </span>
+                                <button className="settings-btn" type="submit">
+                                    Submit Changes
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

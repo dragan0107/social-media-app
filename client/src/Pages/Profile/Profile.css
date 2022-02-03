@@ -36,7 +36,12 @@
     margin: auto;
     
 }
-
+.profile-desc {
+    width: 50%;
+    font-size: 1.1em;
+    font-style: italic;
+    text-align: center;
+}
 .pfp-box {
     position: absolute;
     display: flex;
@@ -101,4 +106,16 @@
     font-size: 2rem;
     margin-bottom: .4em;
     margin-top: .5em;
+}
+
+.submit-box {
+    position: relative;
+}
+
+.info-span {
+    position: absolute;
+    left: -5em;
+    top: 1.5em;
+    color: rgb(52, 84, 189);
+    font-size: 1.1em;
 }
