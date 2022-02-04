@@ -50,7 +50,7 @@
 
 ---
 
-### \_ We can follow/unfollow users
+###  _We can follow/unfollow users_
 
 ![Screenshot_8](https://user-images.githubusercontent.com/73792907/150242435-fe6cd70d-26f9-44be-8a3c-bd29fb1fd14b.jpg)
 
