@@ -40,19 +40,27 @@
 
 ### _Home Page_
 
-![Screenshot_6](https://user-images.githubusercontent.com/73792907/150241854-057ddb4c-2198-4b09-897f-aaf80085386b.jpg)
+![Screenshot_3](https://user-images.githubusercontent.com/73792907/152661734-ff323443-1611-4c0b-b1cd-94cd2256ccbc.jpg)
+
 
 ---
 
 ### _Profile Page_
 
-![Screenshot_7](https://user-images.githubusercontent.com/73792907/150241800-596d2d39-7a98-4504-a5c1-364b3155ac18.jpg)
+![Screenshot_3](https://user-images.githubusercontent.com/73792907/152661753-e38d6aa4-57fb-4fc9-9bff-94be54652e3f.jpg)
+
 
 ---
 
+### _Settings page to update user information._
+
+![Screenshot_4](https://user-images.githubusercontent.com/73792907/152661773-b0fab64f-4849-4118-8b57-f40c033d9f6f.jpg)
+
+
 ###  _We can follow/unfollow users_
 
-![Screenshot_8](https://user-images.githubusercontent.com/73792907/150242435-fe6cd70d-26f9-44be-8a3c-bd29fb1fd14b.jpg)
+![Screenshot_5](https://user-images.githubusercontent.com/73792907/152661782-2bad8934-baab-4fa0-a301-5d3a750df0b5.jpg)
+
 
 ### _Register and Login_
 
