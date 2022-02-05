@@ -44,7 +44,11 @@ const Login = () => {
                             type="password"
                             placeholder="Password"
                         />
-                        {error && <h4>Wrong credentials!!!</h4>}
+                        {error && (
+                            <h4 className="login-err">
+                                Wrong credentials, please try again.
+                            </h4>
+                        )}
                         <button className="login-btn" type="submit">
                             Log In
                         </button>

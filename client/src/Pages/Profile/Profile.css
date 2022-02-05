@@ -119,3 +119,7 @@
     color: rgb(52, 84, 189);
     font-size: 1.1em;
 }
+
+.login-err {
+    color: red;
+}
