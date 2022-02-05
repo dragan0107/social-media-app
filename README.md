@@ -47,7 +47,7 @@
 
 ### _Profile Page_
 
-![Screenshot_3](https://user-images.githubusercontent.com/73792907/152661753-e38d6aa4-57fb-4fc9-9bff-94be54652e3f.jpg)
+![Screenshot_2](https://user-images.githubusercontent.com/73792907/152661802-69faa43f-06cd-4a3b-967d-548fd48fc188.jpg)
 
 
 ---
