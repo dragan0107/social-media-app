@@ -109,7 +109,7 @@ const SharePost = ({ setUpdated }) => {
                         <label htmlFor="media-input">
                             <i className="media-icon fas fa-photo-video"></i>
                         </label>
-                        <span className="media-span">Add Photo or Video</span>
+                        <span className="media-span">Add a photo.</span>
                         <input
                             type="file"
                             name=""

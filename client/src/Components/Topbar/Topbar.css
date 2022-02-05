@@ -16,9 +16,11 @@ header {
     font-family: 'Ubuntu', sans-serif;
 
 }
-
-.topbar a {
+a {
     text-decoration: none;
+}
+
+.center a {
     color: white;
     margin: 2%;
 }
@@ -51,6 +53,7 @@ header {
 
 .logout-link {
     cursor: pointer;
+    color: black;
 }
 
 .right {
@@ -150,6 +153,7 @@ header {
     transition: all .2s ease;
     border-radius: 5px;
     cursor: pointer;
+    color: black;
 }
 
 .option-list li:hover {
@@ -160,3 +164,8 @@ header {
     margin-left: 8px;
     color: black;
 }
+
+.link-box {
+    margin-left: 7px;
+}
+

@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import './Topbar.css';
-import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 const Topbar = () => {
     const { user, dispatch } = useContext(AuthContext);
     const [showTopMenu, setShowTopMenu] = useState(false);
@@ -26,14 +26,11 @@ const Topbar = () => {
                 </div>
                 <div className="center">
                     <input type="text" placeholder="Search" />
-                    <Link to="/">
-                        <a href="">Homepage</a>
+                    <Link to="/" className="homepage-link">
+                        Homepage
                     </Link>
 
                     {/* <a href="">Timeline</a> */}
-                    <a className="logout-link" onClick={handleClick}>
-                        Log Out
-                    </a>
                 </div>
                 <div className="right">
                     <div className="info">
@@ -101,6 +98,17 @@ const Topbar = () => {
                                             <Link to={`/settings`}>
                                                 <span>Settings</span>
                                             </Link>
+                                        </li>
+                                        <li>
+                                            <LogoutIcon />
+                                            <div className="link-box">
+                                                <a
+                                                    className="logout-link"
+                                                    onClick={handleClick}
+                                                >
+                                                    Log Out
+                                                </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
