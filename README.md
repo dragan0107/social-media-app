@@ -54,7 +54,7 @@
 
 ### _Settings page to update user information._
 
-![Screenshot_4](https://user-images.githubusercontent.com/73792907/152661773-b0fab64f-4849-4118-8b57-f40c033d9f6f.jpg)
+![Screenshot_2](https://user-images.githubusercontent.com/73792907/153302859-96d619cc-5869-436d-a43a-52a47b838e14.jpg)
 
 
 ###  _We can follow/unfollow users_
