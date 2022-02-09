@@ -64,6 +64,7 @@
     font-size: 1.3em;
     margin: .6em;
     cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .register-btn:hover {

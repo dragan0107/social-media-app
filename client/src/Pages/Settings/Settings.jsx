@@ -64,7 +64,9 @@ const Settings = () => {
                 <Sidebar />
                 <div className="settings-right">
                     <div className="settings-box">
-                        <h1 className="update-header">Update your profile.</h1>
+                        <h1 className="update-header">
+                            Update your profile information.
+                        </h1>
                         <form action="" onSubmit={handleSubmit}>
                             <div className="pair top-pair">
                                 <span>Username</span>
@@ -149,7 +151,7 @@ const Settings = () => {
                                 />
                             </div>
                             <div className="submit-box">
-                                <span className="info-span">
+                                <span className="update-span">
                                     {errorMsg || successUpdate}
                                 </span>
                                 <button className="settings-btn" type="submit">

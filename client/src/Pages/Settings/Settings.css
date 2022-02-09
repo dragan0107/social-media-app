@@ -14,30 +14,42 @@
     display: flex;
     flex-direction: column;
     width: 600px;
-    padding: 30px;
+    padding: 30px 0;
     margin-top: 3%;
+    border: 3px groove rgb(97, 96, 96);
+    border-radius: 10px;
 }
+
+
 
 .pair {
     display: flex;
     justify-content: space-between;
-    padding: 1em 4.4em;
-    border-bottom: 1px solid grey;
+    padding: 1em 3em;
+    border-bottom: 2px solid rgb(97, 96, 96);;
 }
 
 .pair span {
-    font-size: 1.1em;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(53, 51, 51);
+    
 }
 .top-pair {
-    border-top: 1px solid grey;
+    border-top: 2px solid rgb(97, 96, 96);;
 }
 
 .pair-input {
     font-size: 1em;
+    font-weight: bold;
+    color: rgb(49, 133, 212);
     line-height: 1.4em;
-    padding: 5px 8px;
+    padding: 9px 12px;
     border-radius: 5px;
-    border: 1px solid grey;
+    border: 2px solid grey;
     outline:none;
 }
 
@@ -45,7 +57,7 @@
     font-size: 1em;
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid grey;
+    border: 2px solid grey;
     outline:none;
     font-family: 'Lato', sans-serif;
 }
@@ -81,4 +93,14 @@
 .update-header {
     text-align: center;
     margin-bottom: 1em;
+    color: rgb(97, 96, 96);;
+}
+
+.update-span {
+    position: absolute;
+    bottom: -20px;
+    font-size: 1.2em;
+    width: 100%;
+    color: rgb(56, 128, 236);
+    text-align: center;
 }
