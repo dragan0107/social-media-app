@@ -1,12 +1,19 @@
-# **Social Media App**
+# **_Friendbook_** - Social Media App
 
--   Social media app project (Friendbook) in **_MERN_** **_(MongoDB (mongoose), Express, React, Node.js)_** stack. This is NOT a tutorial copy but It's totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills. All the guidance I've had is Google, and taking a look on some examples for design.
+## **Friendbook** is a social media application made in **_MERN_** stack **_(MongoDB (mongoose), Express, React, Node.js)_**.
+
+---
+
+-   This project is totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills.All the guidance I've had is Google, and taking a look on some examples for design.
+-   I plan on expanding this app as I improve and as I get to learn more tools that will make it better.
+-   **Friendbook** project was a good chance to implement things I yet haven't in some previous projects, build up on that and learn more things. New projects always make me better.
+-   I like writing and keeping my **_README.md_** files tidy so I try to improve on that as well :)
 
 ---
 
 ## **Currently implemented functionalities:**
 
--   [x] User registration/login (JWT Authentication).
+-   [x] User registration/login (JWT Authentication);
 -   [x] Adding status, with or without an image/GIF;
 -   [x] Images are uploaded on a cloud (Cloudinary) service;
 -   [x] Like/Dislike;
@@ -34,14 +41,11 @@
 
 ---
 
-## **Front-end design (will be updated and tweaked later on)**
-
-## **_Screenshots_**
+## **_Screenshots_** of how the application looks at the moment. _(some elements are still just a placeholder)_
 
 ### _Home Page_
 
 ![Screenshot_3](https://user-images.githubusercontent.com/73792907/152661734-ff323443-1611-4c0b-b1cd-94cd2256ccbc.jpg)
-
 
 ---
 
@@ -49,18 +53,15 @@
 
 ![Screenshot_2](https://user-images.githubusercontent.com/73792907/152661802-69faa43f-06cd-4a3b-967d-548fd48fc188.jpg)
 
-
 ---
 
 ### _Settings page to update user information._
 
 ![Screenshot_2](https://user-images.githubusercontent.com/73792907/153302859-96d619cc-5869-436d-a43a-52a47b838e14.jpg)
 
-
-###  _We can follow/unfollow users_
+### _We can follow/unfollow users_
 
 ![Screenshot_5](https://user-images.githubusercontent.com/73792907/152661782-2bad8934-baab-4fa0-a301-5d3a750df0b5.jpg)
-
 
 ### _Register and Login_
 
