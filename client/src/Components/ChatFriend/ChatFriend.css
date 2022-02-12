@@ -1,0 +1,23 @@
+.sidebar-friend {
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    border-radius: 25px;
+    padding: 0.3rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.friend-name{
+    margin-left: 4%;
+}
+
+.sidebar-friend:hover {
+    background-color: rgb(204, 203, 203);
+}

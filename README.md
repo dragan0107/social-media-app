@@ -4,7 +4,7 @@
 
 ---
 
--   This project is totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills.All the guidance I've had is Google, and taking a look on some examples for design.
+-   This project is totally being made from scratch with the knowledge I'm operating with at the moment, where I try to improve both Front and Back-end skills. All the guidance I've had was Google, and taking a look on some examples for design.
 -   I plan on expanding this app as I improve and as I get to learn more tools that will make it better.
 -   **Friendbook** project was a good chance to implement things I yet haven't in some previous projects, build up on that and learn more things. New projects always make me better.
 -   I like writing and keeping my **_README.md_** files tidy so I try to improve on that as well :)

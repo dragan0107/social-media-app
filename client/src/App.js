@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './Context/AuthContext';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import Messenger from './Pages/Messenger/Messenger';
 import Profile from './Pages/Profile/Profile';
 import Register from './Pages/Register/Register';
 import Settings from './Pages/Settings/Settings';
@@ -27,6 +28,10 @@ function App() {
             <Route
                 path="settings"
                 element={user ? <Settings /> : <Navigate to="/" />}
+            />
+            <Route
+                path="messenger"
+                element={user ? <Messenger /> : <Navigate to="/" />}
             />
         </Routes>
     );

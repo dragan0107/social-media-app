@@ -1,0 +1,16 @@
+.messenger-wrapper {
+    display: flex;
+    font-family: 'Lato', sans-serif;
+}
+
+.conversation-list {
+ flex: 3;   
+}
+
+.message-box {
+    flex: 6;
+}
+
+.online-friends-messenger {
+    flex: 3;
+}

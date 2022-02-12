@@ -45,16 +45,20 @@ const Topbar = () => {
                                     <span className="count">{friendReq}</span>
                                 )}
                             </div>
-                            <div
-                                className={`notification ${
-                                    messages > 0 ? 'white-notification' : ''
-                                } `}
-                            >
-                                <i class="fas fa-envelope"></i>
-                                {messages > 0 && (
-                                    <span className="count">{messages}</span>
-                                )}
-                            </div>
+                            <Link className="notification" to="/messenger">
+                                <div
+                                    className={`notification ${
+                                        messages > 0 ? 'white-notification' : ''
+                                    } `}
+                                >
+                                    <i class="fas fa-envelope"></i>
+                                    {messages > 0 && (
+                                        <span className="count">
+                                            {messages}
+                                        </span>
+                                    )}
+                                </div>
+                            </Link>
                             <div
                                 className={`notification ${
                                     notifications > 0
