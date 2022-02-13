@@ -26,7 +26,7 @@
 
 ## **Functionalities soon to come:**
 
--   [ ] Sockets for chat;
+-   [ ] Instant messaging with Socket.io **_IN PROGRESS_**
 -   [ ] Add favorite (close) friends;
 -   [ ] Search for users by their username;
 

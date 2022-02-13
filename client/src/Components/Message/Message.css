@@ -1,8 +1,7 @@
 .message-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 2em 0;
-
+    margin: 0;
 }
 
 .msg-top {
@@ -14,6 +13,9 @@
     margin: 1em 1em 0em 1em;
 }
 
+.msg-top.own-msg-order {
+    flex-direction: row-reverse;
+}
 .msg-text {
     background-color: #548CFF;
     border-radius: 20px;
@@ -27,7 +29,24 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.msg-img.own-msg-img {
+    margin-left: 1em;
+    margin-right: 0;
+}
 .msg-ago {
     margin-left: 6.6em;
     font-size: .8em;
+}
+.msg-ago.own-msg-ago-span {
+    margin-right: 6.7em;
+}
+
+.message-wrapper.own {
+    align-items: flex-end;
+}
+
+.msg-text.own-msg-style {
+    background-color: rgb(195, 197, 197);
+    color: black;
 }

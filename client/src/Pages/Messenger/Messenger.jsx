@@ -34,9 +34,26 @@ const Messenger = () => {
                 <div className="message-box">
                     <div className="message-box-top">
                         <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message own={true} />
+                        <Message own={true} />
                     </div>
-                    <div className="message-input-box">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <div className="message-input-box-wrapper">
+                        <form className="msg-form" action="">
+                            <textarea
+                                className="msg-input"
+                                name=""
+                                id=""
+                                cols={60}
+                                rows={6}
+                                autoFocus
+                            ></textarea>
+                            <button className="msg-send-btn" type="submit">
+                                Send
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div className="online-friends-messenger">Online friends</div>
