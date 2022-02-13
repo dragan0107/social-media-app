@@ -1,14 +1,51 @@
+.container-messenger {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .messenger-wrapper {
     display: flex;
     font-family: 'Lato', sans-serif;
+    height: calc(100vh - 66px);
+    padding: 0 10%;
 }
 
 .conversation-list {
- flex: 3;   
+    flex: 3;   
+    height: calc(100vh - 73.78px);
+    position: sticky;
+    overflow-y: auto;
+}
+
+.conversations-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0;
+    border-right: 1px solid grey;
+    border-left: 2px solid grey;
+}
+.convo-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: .8em;
+}
+
+.convo-hr {
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid rgb(124, 124, 124);
 }
 
 .message-box {
     flex: 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 66px);
+    position: sticky;
 }
 
 .online-friends-messenger {
