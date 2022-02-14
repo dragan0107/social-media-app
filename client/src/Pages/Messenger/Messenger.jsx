@@ -2,6 +2,7 @@ import React from 'react';
 import ChatFriend from '../../Components/ChatFriend/ChatFriend';
 import Message from '../../Components/Message/Message';
 import Topbar from '../../Components/Topbar/Topbar';
+import OnlineFriend from '../../Components/OnlineFriend/OnlineFriend';
 import './Messenger.css';
 
 const Messenger = () => {
@@ -49,6 +50,7 @@ const Messenger = () => {
                                 cols={60}
                                 rows={6}
                                 autoFocus
+                                placeholder="Message your friend..."
                             ></textarea>
                             <button className="msg-send-btn" type="submit">
                                 Send
@@ -56,7 +58,17 @@ const Messenger = () => {
                         </form>
                     </div>
                 </div>
-                <div className="online-friends-messenger">Online friends</div>
+                <div className="online-friends-messenger">
+                    <span className="online-span">Online friends</span>
+                    <hr className="convo-hr online-hr" />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                    <OnlineFriend />
+                </div>
             </section>
         </div>
     );

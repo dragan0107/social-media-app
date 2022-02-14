@@ -27,16 +27,26 @@
     border-right: 1px solid grey;
     border-left: 2px solid grey;
 }
-.convo-title {
+.convo-title, .online-span {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: .8em;
+    text-align: center;
+}
+
+.online-span {
+    margin-top: 1em;
 }
 
 .convo-hr {
     width: 80%;
     border: none;
     border-bottom: 1px solid rgb(124, 124, 124);
+}
+
+.online-hr {
+    margin-left: 3em;
+    margin-bottom: 1em;
 }
 
 .message-box {
@@ -100,4 +110,9 @@
 
 .msg-send-btn:hover {
     background-color: rgb(21, 121, 21);
+}
+
+.online-friends-messenger {
+    display: flex;
+    flex-direction: column;
 }

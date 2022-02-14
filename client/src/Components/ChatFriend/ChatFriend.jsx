@@ -9,7 +9,7 @@ const ChatFriend = () => {
                 alt=""
                 className="chat-profile-pic"
             />
-            <span className="chat-friend-name">Drip Drip</span>
+            <span className="chat-friend-name">drip016</span>
         </div>
     );
 };
