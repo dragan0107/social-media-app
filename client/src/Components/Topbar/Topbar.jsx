@@ -6,6 +6,7 @@ import './Topbar.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChatIcon from '@mui/icons-material/Chat';
 const Topbar = () => {
     const { user, dispatch } = useContext(AuthContext);
     const [showTopMenu, setShowTopMenu] = useState(false);
@@ -51,7 +52,8 @@ const Topbar = () => {
                                         messages > 0 ? 'white-notification' : ''
                                     } `}
                                 >
-                                    <i class="fas fa-envelope"></i>
+                                    {/* <i class="fas fa-envelope"></i> */}
+                                    <ChatIcon />
                                     {messages > 0 && (
                                         <span className="count">
                                             {messages}
