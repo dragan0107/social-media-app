@@ -82,3 +82,12 @@ export const reactionChecker = (user, post, setIsLiked, setIsDisliked) => {
         setIsDisliked(true);
     }
 };
+
+export const getConversations = async (setConversations, id) => {
+    try {
+        const res = await axios.get(`/conversations/${id}`);
+        setConversations(res.data.conversations);
+    } catch (error) {
+        console.log(error);
+    }
+};

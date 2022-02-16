@@ -1,7 +1,7 @@
 import React from 'react';
 import './Message.css';
 
-const Message = ({ own }) => {
+const Message = ({ own, data }) => {
     return (
         <div className={'message-wrapper ' + (own ? 'own' : +'')}>
             <div className={'msg-top ' + (own ? 'own-msg-order' : +'')}>
@@ -11,10 +11,7 @@ const Message = ({ own }) => {
                     alt=""
                 />
                 <p className={'msg-text ' + (own ? 'own-msg-style' : +'')}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Deserunt corrupti laboriosam, harum veniam labore totam
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Deserunt corrupti laboriosam, harum veniam labore totam
+                    {data.text}
                 </p>
             </div>
             <div className="msg-bottom">

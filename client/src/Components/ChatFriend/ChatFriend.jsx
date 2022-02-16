@@ -25,7 +25,7 @@ const ChatFriend = ({ friend }) => {
         getUser();
     }, [user]);
     return (
-        <div className="chat-friend">
+        <>
             <img
                 src={
                     userInfo.profilePic ||
@@ -37,7 +37,7 @@ const ChatFriend = ({ friend }) => {
             <span className="chat-friend-name">
                 {userInfo ? userInfo.username : ''}
             </span>
-        </div>
+        </>
     );
 };
 

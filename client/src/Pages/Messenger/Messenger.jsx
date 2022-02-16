@@ -5,25 +5,33 @@ import Topbar from '../../Components/Topbar/Topbar';
 import OnlineFriend from '../../Components/OnlineFriend/OnlineFriend';
 import './Messenger.css';
 import { AuthContext } from '../../Context/AuthContext';
+import { getConversations } from '../../API_Actions/ApiCalls';
 import axios from 'axios';
 
 const Messenger = () => {
     const { user } = useContext(AuthContext);
 
     const [conversations, setConversations] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
+    console.log(currentChat);
 
     useEffect(() => {
-        const getConversations = async () => {
+        getConversations(setConversations, user._id);
+    }, [user]);
+
+    useEffect(() => {
+        const getMessages = async () => {
             try {
-                const res = await axios.get(`/conversations/${user._id}`);
-                setConversations(res.data.conversations);
+                const res = await axios.get(`/messages/${currentChat._id}`);
+                setMessages(res.data);
             } catch (error) {
                 console.log(error);
             }
         };
-        getConversations();
-    }, [user]);
+        getMessages();
+    }, [currentChat]);
+
     return (
         <div className="container-messenger">
             <Topbar />
@@ -33,14 +41,31 @@ const Messenger = () => {
                         <span className="convo-title">Conversations</span>
                         <hr className="convo-hr" />
                         {conversations.map((e) => (
-                            <ChatFriend friend={e} />
+                            <div
+                                className="chat-friend"
+                                onClick={() => setCurrentChat(e)}
+                            >
+                                <ChatFriend key={e._id} friend={e} />
+                            </div>
                         ))}
                     </div>
                 </div>
                 <div className="message-box">
                     <div className="message-box-top">
-                        {/* {!messages && } */}
-                        <h1>Start a conversation with a user.</h1>
+                        {(messages.length > 0) ? (
+                            messages.map((el) => (
+                                <Message
+                                    data={el}
+                                    own={user._id === el.sender}
+                                />
+                            ))
+                        ) : (
+                            <div className="no-convo-box">
+                                <h1 className="no-conv-info">
+                                    Start a conversation with a friend.
+                                </h1>
+                            </div>
+                        )}
                         {/* <Message />
                         <Message />
                         <Message />
