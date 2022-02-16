@@ -17,7 +17,8 @@
     flex-direction: row-reverse;
 }
 .msg-text {
-    background-color: #548CFF;
+    background-color: rgb(195, 197, 197);
+    color: black;
     border-radius: 20px;
     padding: 1em;
 }
@@ -47,6 +48,6 @@
 }
 
 .msg-text.own-msg-style {
-    background-color: rgb(195, 197, 197);
-    color: black;
+    background-color: #548CFF;
+    color: white;
 }
