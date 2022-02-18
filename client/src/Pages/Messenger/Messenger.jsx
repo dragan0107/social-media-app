@@ -12,11 +12,12 @@ const Messenger = () => {
     const { user } = useContext(AuthContext);
 
     const [conversations, setConversations] = useState([]);
+    const [conversationUsers, setConversationUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [newMessage, setNewMessage] = useState(null);
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
-    console.log(currentChat);
+    console.log(conversationUsers);
 
     useEffect(() => {
         getConversations(setConversations, user._id);
@@ -61,7 +62,11 @@ const Messenger = () => {
                                 className="chat-friend"
                                 onClick={() => setCurrentChat(e)}
                             >
-                                <ChatFriend key={e._id} friend={e} />
+                                <ChatFriend
+                                    key={e._id}
+                                    friend={e}
+                                    setConversationUsers={setConversationUsers}
+                                />
                             </div>
                         ))}
                     </div>
@@ -74,6 +79,8 @@ const Messenger = () => {
                                     <Message
                                         data={el}
                                         own={user._id === el.sender}
+                                        conversationUsers={conversationUsers}
+                                        msgSender={el.sender}
                                     />
                                 </div>
                             ))
@@ -110,11 +117,6 @@ const Messenger = () => {
                 <div className="online-friends-messenger">
                     <span className="online-span">Online friends</span>
                     <hr className="convo-hr online-hr" />
-                    <OnlineFriend />
-                    <OnlineFriend />
-                    <OnlineFriend />
-                    <OnlineFriend />
-                    <OnlineFriend />
                     <OnlineFriend />
                     <OnlineFriend />
                 </div>

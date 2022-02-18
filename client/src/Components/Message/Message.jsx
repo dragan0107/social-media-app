@@ -1,24 +1,13 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import axios from 'axios';
 import { format } from 'timeago.js';
 import './Message.css';
 
-const Message = ({ own, data }) => {
+const Message = ({ own, data, conversationUsers, msgSender }) => {
     const { user } = useContext(AuthContext);
-    const [sender, setSender] = useState([]);
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get(`/users/?userId=${data.sender}`);
-                setSender(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getUser();
-    }, []);
+    const sender = conversationUsers.filter((el) => el._id === msgSender)[0];
+
     return (
         <div className={'message-wrapper ' + (own ? 'own' : +'')}>
             <div className={'msg-top ' + (own ? 'own-msg-order' : +'')}>

@@ -16,6 +16,8 @@
     height: calc(100vh - 73.78px);
     position: sticky;
     overflow-y: auto;
+    border-left: 2px solid grey;
+    border-right: 1px solid grey;
 }
 
 .conversations-box {
@@ -24,8 +26,6 @@
     justify-content: center;
     align-items: center;
     padding: 1em 0;
-    border-right: 1px solid grey;
-    border-left: 2px solid grey;
 }
 .convo-title, .online-span {
     font-size: 1.2em;

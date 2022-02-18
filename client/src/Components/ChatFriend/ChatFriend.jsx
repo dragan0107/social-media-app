@@ -6,7 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import './ChatFriend.css';
 import axios from 'axios';
 
-const ChatFriend = ({ friend }) => {
+const ChatFriend = ({ friend, setConversationUsers }) => {
     const { user } = useContext(AuthContext);
 
     const [userInfo, setUserInfo] = useState([]);
@@ -18,6 +18,9 @@ const ChatFriend = ({ friend }) => {
             try {
                 const res = await axios.get(`/users/?userId=${chatFriendId}`);
                 setUserInfo(res.data);
+                setConversationUsers((prevValues) => {
+                    return [...prevValues, res.data];
+                });
             } catch (error) {
                 console.log(error);
             }
