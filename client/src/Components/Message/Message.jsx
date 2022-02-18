@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
+import { format } from 'timeago.js';
 import './Message.css';
 
 const Message = ({ own, data }) => {
+    const { user } = useContext(AuthContext);
+    const [sender, setSender] = useState([]);
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get(`/users/?userId=${data.sender}`);
+                setSender(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getUser();
+    }, []);
     return (
         <div className={'message-wrapper ' + (own ? 'own' : +'')}>
             <div className={'msg-top ' + (own ? 'own-msg-order' : +'')}>
                 <img
                     className={'msg-img ' + (own ? 'own-msg-img' : +'')}
-                    src="https://res.cloudinary.com/dripcloud/image/upload/v1642120967/test_upload_react/facebook-default-no-profile-pic1_wq7ysr.jpg"
+                    src={own ? user.profilePic : sender.profilePic}
                     alt=""
                 />
                 <p className={'msg-text ' + (own ? 'own-msg-style' : +'')}>
@@ -16,7 +33,7 @@ const Message = ({ own, data }) => {
             </div>
             <div className="msg-bottom">
                 <span className={'msg-ago ' + (own ? 'own-msg-ago-span' : +'')}>
-                    5 min ago
+                    {format(data.createdAt)}
                 </span>
             </div>
         </div>

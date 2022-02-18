@@ -91,3 +91,12 @@ export const getConversations = async (setConversations, id) => {
         console.log(error);
     }
 };
+
+export const getMessages = async (setMessages, id) => {
+    try {
+        const res = await axios.get(`/messages/${id}`);
+        setMessages(res.data);
+    } catch (error) {
+        console.log(error);
+    }
+};

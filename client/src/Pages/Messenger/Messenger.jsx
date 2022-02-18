@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import ChatFriend from '../../Components/ChatFriend/ChatFriend';
 import Message from '../../Components/Message/Message';
 import Topbar from '../../Components/Topbar/Topbar';
 import OnlineFriend from '../../Components/OnlineFriend/OnlineFriend';
 import './Messenger.css';
 import { AuthContext } from '../../Context/AuthContext';
-import { getConversations } from '../../API_Actions/ApiCalls';
+import { getConversations, getMessages } from '../../API_Actions/ApiCalls';
 import axios from 'axios';
 
 const Messenger = () => {
@@ -13,7 +13,9 @@ const Messenger = () => {
 
     const [conversations, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
+    const [newMessage, setNewMessage] = useState(null);
     const [messages, setMessages] = useState([]);
+    const scrollRef = useRef();
     console.log(currentChat);
 
     useEffect(() => {
@@ -21,16 +23,30 @@ const Messenger = () => {
     }, [user]);
 
     useEffect(() => {
-        const getMessages = async () => {
+        getMessages(setMessages, currentChat?._id);
+    }, [currentChat]);
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    const handleClick = async () => {
+        if (newMessage) {
             try {
-                const res = await axios.get(`/messages/${currentChat._id}`);
-                setMessages(res.data);
+                const res = await axios.post('/messages/', {
+                    conversationId: currentChat?._id,
+                    sender: user._id,
+                    text: newMessage,
+                });
+                setMessages((prevValues) => {
+                    return [...prevValues, res.data.newMsg];
+                });
+                setNewMessage('');
             } catch (error) {
                 console.log(error);
             }
-        };
-        getMessages();
-    }, [currentChat]);
+        }
+    };
 
     return (
         <div className="container-messenger">
@@ -52,12 +68,14 @@ const Messenger = () => {
                 </div>
                 <div className="message-box">
                     <div className="message-box-top">
-                        {(messages.length > 0) ? (
+                        {messages.length > 0 ? (
                             messages.map((el) => (
-                                <Message
-                                    data={el}
-                                    own={user._id === el.sender}
-                                />
+                                <div ref={scrollRef}>
+                                    <Message
+                                        data={el}
+                                        own={user._id === el.sender}
+                                    />
+                                </div>
                             ))
                         ) : (
                             <div className="no-convo-box">
@@ -66,15 +84,9 @@ const Messenger = () => {
                                 </h1>
                             </div>
                         )}
-                        {/* <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message own={true} />
-                        <Message own={true} /> */}
                     </div>
                     <div className="message-input-box-wrapper">
-                        <form className="msg-form" action="">
+                        <div className="msg-form">
                             <textarea
                                 className="msg-input"
                                 name=""
@@ -83,11 +95,16 @@ const Messenger = () => {
                                 rows={6}
                                 autoFocus
                                 placeholder="Message your friend..."
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                value={newMessage}
                             ></textarea>
-                            <button className="msg-send-btn" type="submit">
+                            <button
+                                className="msg-send-btn"
+                                onClick={handleClick}
+                            >
                                 Send
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div className="online-friends-messenger">
