@@ -34,7 +34,6 @@
 -   [x] Front-End design completed.
 -   [x] Back-end API completed.
 -   [ ] Connecting Front with Back **_IN PROGRESS_**
--   [ ] Integrating sockets for instant chat.
 -   [x] Responsiveness for desktop.
 -   [ ] Responsiveness for mobile devices.
 
@@ -54,13 +53,24 @@
 
 ---
 
+### _Messenger - chat application_
+![Screenshot_3](https://user-images.githubusercontent.com/73792907/154598314-0b43920d-5b17-4b75-af0e-0f9f9e4c1065.jpg)
+
+![Screenshot_4](https://user-images.githubusercontent.com/73792907/154598317-8d22e7f5-42b8-477a-8b33-8537e7f153f7.jpg)
+
+---
+
 ### _Settings page to update user information._
 
 ![Screenshot_2](https://user-images.githubusercontent.com/73792907/153302859-96d619cc-5869-436d-a43a-52a47b838e14.jpg)
 
+---
+
 ### _We can follow/unfollow users_
 
 ![Screenshot_5](https://user-images.githubusercontent.com/73792907/152661782-2bad8934-baab-4fa0-a301-5d3a750df0b5.jpg)
+
+---
 
 ### _Register and Login_
 
