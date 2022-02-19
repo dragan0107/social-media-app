@@ -7,6 +7,7 @@ import './Messenger.css';
 import { AuthContext } from '../../Context/AuthContext';
 import { getConversations, getMessages } from '../../API_Actions/ApiCalls';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const Messenger = () => {
     const { user } = useContext(AuthContext);
@@ -14,10 +15,20 @@ const Messenger = () => {
     const [conversations, setConversations] = useState([]);
     const [conversationUsers, setConversationUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
-    const [newMessage, setNewMessage] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState(null);
+    const [socket, setSocket] = useState(null);
     const scrollRef = useRef();
-    console.log(conversationUsers);
+
+    useEffect(() => {
+        setSocket(io('http://localhost:1717'));
+    }, []);
+
+    useEffect(() => {
+        socket?.on('welcome', (message) => {
+            console.log(message);
+        });
+    }, [socket, newMessage]);
 
     useEffect(() => {
         getConversations(setConversations, user._id);
@@ -42,6 +53,7 @@ const Messenger = () => {
                 setMessages((prevValues) => {
                     return [...prevValues, res.data.newMsg];
                 });
+                socket.emit('message', newMessage);
                 setNewMessage('');
             } catch (error) {
                 console.log(error);
