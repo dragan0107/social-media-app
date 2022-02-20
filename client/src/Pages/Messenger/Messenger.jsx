@@ -12,20 +12,25 @@ import { io } from 'socket.io-client';
 const Messenger = () => {
     const { user } = useContext(AuthContext);
 
+    const socket = useRef();
     const [conversations, setConversations] = useState([]);
     const [conversationUsers, setConversationUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
-    const [socket, setSocket] = useState(null);
     const scrollRef = useRef();
 
     useEffect(() => {
-        setSocket(io('http://localhost:1717'));
-    }, []);
+        socket.current = io('http://localhost:1717');
+        socket.current.emit('addUser', user._id);
+
+        socket.current.on('usersConnected', (users) => {
+            console.log(users);
+        });
+    }, [user]);
 
     useEffect(() => {
-        socket?.on('welcome', (message) => {
+        socket?.current.on('welcome', (message) => {
             console.log(message);
         });
     }, [socket, newMessage]);
@@ -53,7 +58,7 @@ const Messenger = () => {
                 setMessages((prevValues) => {
                     return [...prevValues, res.data.newMsg];
                 });
-                socket.emit('message', newMessage);
+                socket.current.emit('message', newMessage);
                 setNewMessage('');
             } catch (error) {
                 console.log(error);
