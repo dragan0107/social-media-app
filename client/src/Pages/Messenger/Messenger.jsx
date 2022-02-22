@@ -18,6 +18,7 @@ const Messenger = () => {
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
+    const [arrivalMessage, setArrivalMessage] = useState(null);
     const scrollRef = useRef();
 
     useEffect(() => {
@@ -27,7 +28,23 @@ const Messenger = () => {
         socket.current.on('usersConnected', (users) => {
             console.log(users);
         });
+
+        socket.current.on('getMessage', (incMessage) => {
+            setArrivalMessage({
+                sender: incMessage.senderId,
+                text: incMessage.text,
+                createdAt: Date.now(),
+            });
+        });
     }, [user]);
+
+    useEffect(() => {
+        arrivalMessage &&
+            currentChat?.members.includes(arrivalMessage.sender) &&
+            setMessages((prevValues) => {
+                return [...prevValues, arrivalMessage];
+            });
+    }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
         socket?.current.on('welcome', (message) => {
@@ -50,6 +67,14 @@ const Messenger = () => {
     const handleClick = async () => {
         if (newMessage) {
             try {
+                const receiverId = currentChat.members.find(
+                    (member) => member !== user._id
+                );
+                socket.current.emit('sendMessage', {
+                    senderId: user._id,
+                    receiverId,
+                    text: newMessage,
+                });
                 const res = await axios.post('/messages/', {
                     conversationId: currentChat?._id,
                     sender: user._id,
@@ -58,7 +83,6 @@ const Messenger = () => {
                 setMessages((prevValues) => {
                     return [...prevValues, res.data.newMsg];
                 });
-                socket.current.emit('message', newMessage);
                 setNewMessage('');
             } catch (error) {
                 console.log(error);
