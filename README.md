@@ -20,12 +20,12 @@
 -   [x] Delete posts;
 -   [x] Update profile picture;
 -   [x] Update profile information from the **_Settings_** page;
+-   [x] Instant messaging with Socket.io
 
 ---
 
 ## **Functionalities soon to come:**
 
--   [ ] Instant messaging with Socket.io **_IN PROGRESS_**
 -   [ ] Add favorite (close) friends;
 -   [ ] Search for users by their username;
 
@@ -54,6 +54,7 @@
 ---
 
 ### _Messenger - chat application_
+
 ![Screenshot_3](https://user-images.githubusercontent.com/73792907/154598314-0b43920d-5b17-4b75-af0e-0f9f9e4c1065.jpg)
 
 ![Screenshot_4](https://user-images.githubusercontent.com/73792907/154598317-8d22e7f5-42b8-477a-8b33-8537e7f153f7.jpg)
