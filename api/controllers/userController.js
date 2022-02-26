@@ -129,3 +129,15 @@ exports.unfollowUser = async (req, res) => {
         });
     }
 };
+
+exports.getFriends = async (req, res) => {
+    try {
+        const user = User.findById(req.params.userId);
+
+        const friends = await Promise.all(
+            user.followings.map((friendId) => {
+                return User.findById(friendId);
+            })
+        );
+    } catch (error) {}
+};

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const OnlineFriend = () => {
+const OnlineFriend = ({ onlineUsers, curretnUserId, setCurrentChat }) => {
+    const [friends, setFriends] = useState([]);
+    const [onlineFriends, setOnlineFriends] = useState([]);
+
     return (
         <div>
             <li className="rightbar-friend">

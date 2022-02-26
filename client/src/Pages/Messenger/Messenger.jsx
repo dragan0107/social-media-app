@@ -15,6 +15,7 @@ const Messenger = () => {
     const socket = useRef();
     const [conversations, setConversations] = useState([]);
     const [conversationUsers, setConversationUsers] = useState([]);
+    const [onlineUsers, setOnlineUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState(null);
@@ -26,7 +27,7 @@ const Messenger = () => {
         socket.current.emit('addUser', user._id);
 
         socket.current.on('usersConnected', (users) => {
-            console.log(users);
+            setOnlineUsers(users);
         });
 
         socket.current.on('getMessage', (incMessage) => {
@@ -158,8 +159,11 @@ const Messenger = () => {
                 <div className="online-friends-messenger">
                     <span className="online-span">Online friends</span>
                     <hr className="convo-hr online-hr" />
-                    <OnlineFriend />
-                    <OnlineFriend />
+                    <OnlineFriend
+                        onlineUsers={onlineUsers}
+                        currentUserId={user._id}
+                        setCurrentChat={setCurrentChat}
+                    />
                 </div>
             </section>
         </div>
