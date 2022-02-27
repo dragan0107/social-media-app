@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-const OnlineFriend = ({ onlineUsers, curretnUserId, setCurrentChat }) => {
+const OnlineFriend = ({ onlineUsers, currentUserId, setCurrentChat }) => {
     const [friends, setFriends] = useState([]);
     const [onlineFriends, setOnlineFriends] = useState([]);
+
+    useEffect(() => {
+        const getFriends = async () => {
+            try {
+                const res = await axios.get(`users/friends/${currentUserId}`);
+                setFriends(res.data);
+                console.log(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getFriends();
+    }, [currentUserId]);
+
+    useEffect(() => {
+        setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+    }, [onlineUsers]);
+    console.log(onlineFriends);
 
     return (
         <div>

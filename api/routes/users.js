@@ -6,10 +6,12 @@ const {
     deleteUser,
     followUser,
     unfollowUser,
+    getFriends,
 } = require('../controllers/userController');
 
 router
     .get('/', getUser)
+    .get('/friends/:userId', getFriends)
     .put('/:id', updateUser)
     .delete('/:id', deleteUser)
     .put('/:id/follow', followUser)

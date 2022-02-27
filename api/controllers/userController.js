@@ -132,12 +132,24 @@ exports.unfollowUser = async (req, res) => {
 
 exports.getFriends = async (req, res) => {
     try {
-        const user = User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId);
 
         const friends = await Promise.all(
-            user.followings.map((friendId) => {
+            user.following.map((friendId) => {
                 return User.findById(friendId);
             })
         );
-    } catch (error) {}
+
+        const friendsList = [];
+        friends.map((friend) => {
+            const { _id, username, profilePic } = friend;
+            friendsList.push({ _id, username, profilePic });
+        });
+        console.log(friendsList);
+        res.status(200).json(friendsList);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something went wrong.',
+        });
+    }
 };
