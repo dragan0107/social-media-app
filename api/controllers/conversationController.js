@@ -35,3 +35,22 @@ exports.getConversations = async (req, res) => {
         });
     }
 };
+
+//Get conversation including 2 users.
+
+exports.getConversationsTwoUsers = async (req, res) => {
+    try {
+        const conversation = await Conversation.findOne({
+            members: {
+                $all: [req.params.firstUserId, req.params.secondUserId],
+            },
+        });
+
+        res.status(200).json(conversation);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something went wrong',
+            error,
+        });
+    }
+};

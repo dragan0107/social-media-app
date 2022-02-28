@@ -145,7 +145,6 @@ exports.getFriends = async (req, res) => {
             const { _id, username, profilePic } = friend;
             friendsList.push({ _id, username, profilePic });
         });
-        console.log(friendsList);
         res.status(200).json(friendsList);
     } catch (error) {
         res.status(500).json({

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 import { useEffect } from 'react';
 import axios from 'axios';
 
 const OnlineFriend = ({ onlineUsers, currentUserId, setCurrentChat }) => {
+    const { user } = useContext(AuthContext);
     const [friends, setFriends] = useState([]);
     const [onlineFriends, setOnlineFriends] = useState([]);
 
@@ -21,22 +23,37 @@ const OnlineFriend = ({ onlineUsers, currentUserId, setCurrentChat }) => {
 
     useEffect(() => {
         setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
-    }, [onlineUsers]);
-    console.log(onlineFriends);
+    }, [onlineUsers, friends]);
+
+    const handleClick = async (friend) => {
+        try {
+            const res = await axios.get(
+                `/conversations/${user._id}/${friend._id}`
+            );
+            setCurrentChat(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div>
-            <li className="rightbar-friend">
-                <div className="friend-image-wrapper">
-                    <img
-                        src="https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png"
-                        alt=""
-                        className="friend-pfp"
-                    />
-                    <span className="friend-online"></span>
-                </div>
-                <span className="friend-name">James Doe</span>
-            </li>
+            {onlineFriends.map((f) => (
+                <li className="rightbar-friend" onClick={() => handleClick(f)}>
+                    <div className="friend-image-wrapper">
+                        <img
+                            src={
+                                f.profilePic ||
+                                'https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png'
+                            }
+                            alt=""
+                            className="friend-pfp"
+                        />
+                        <span className="friend-online"></span>
+                    </div>
+                    <span className="friend-name">{f.username}</span>
+                </li>
+            ))}
         </div>
     );
 };

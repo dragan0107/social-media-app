@@ -26,8 +26,11 @@ const Messenger = () => {
         socket.current = io('http://localhost:1717');
         socket.current.emit('addUser', user._id);
 
+        // We loop through logged in user followings and check if any of the online users matches the current user friends.
         socket.current.on('usersConnected', (users) => {
-            setOnlineUsers(users);
+            setOnlineUsers(
+                user.following.filter((f) => users.some((u) => u.userId === f))
+            );
         });
 
         socket.current.on('getMessage', (incMessage) => {

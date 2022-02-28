@@ -52,11 +52,6 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
                     <span className="online-friends">Online friends</span>
                     <ul className="rightbar-friend-list">
                         <OnlineFriend />
-                        <OnlineFriend />
-                        <OnlineFriend />
-                        <OnlineFriend />
-                        <OnlineFriend />
-                        <OnlineFriend />
                     </ul>
                 </div>
             </>
