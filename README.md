@@ -61,6 +61,12 @@
 
 ---
 
+### _Messenger now shows currently online users (when they connect to the socket server) and the messages are instant._
+
+![Screenshot_1](https://user-images.githubusercontent.com/73792907/156459503-c9103eb1-2122-4909-8a83-5915b7280a8e.jpg)
+
+---
+
 ### _Settings page to update user information._
 
 ![Screenshot_2](https://user-images.githubusercontent.com/73792907/153302859-96d619cc-5869-436d-a43a-52a47b838e14.jpg)
