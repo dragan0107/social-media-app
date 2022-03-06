@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const catchAsync = require('../utils/catchAsync');
 
 //Token generator;
 
@@ -22,26 +23,26 @@ const createSendToken = (user, res) => {
 };
 
 //Register
-exports.userRegister = async (req, res) => {
-    try {
-        const newUser = await User.create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-        });
+exports.userRegister = catchAsync(async (req, res) => {
+    // try {
+    const newUser = await User.create({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+    });
 
-        // const { password, ...rest } = newUser._doc;
+    // const { password, ...rest } = newUser._doc;
 
-        createSendToken(newUser, res);
-    } catch (error) {
-        res.status(400).json({
-            message: 'Something went wrong..',
-            error: error,
-        });
-    }
-};
+    createSendToken(newUser, res);
+    // } catch (error) {
+    //     res.status(400).json({
+    //         message: 'Something went wrong..',
+    //         error: error,
+    //     });
+    // }
+});
 
-exports.userLogin = async (req, res) => {
+exports.userLogin = catchAsync(async (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -50,29 +51,25 @@ exports.userLogin = async (req, res) => {
         });
     }
 
-    try {
-        const foundUser = await User.findOne({ username });
+    const foundUser = await User.findOne({ username });
 
-        if (!foundUser) {
-            return res.status(404).json({ message: "User doesn't exist." });
-        }
-
-        const validatePass = await bcrypt.compare(password, foundUser.password);
-
-        if (!validatePass) {
-            return res.status(404).json({
-                message: 'Wrong credentials.',
-            });
-        }
-        createSendToken(foundUser, res);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            message: 'something went wrong',
-            error: error,
+    if (!foundUser) {
+        // return res.status(404).json({ message: "User doesn't exist." });
+        return next({
+            statusCode: 404,
+            message: 'user doesnt exist nigga',
         });
     }
-};
+
+    const validatePass = await bcrypt.compare(password, foundUser.password);
+
+    if (!validatePass) {
+        return res.status(404).json({
+            message: 'Wrong credentials.',
+        });
+    }
+    createSendToken(foundUser, res);
+});
 
 exports.protect = async (req, res, next) => {
     let token;

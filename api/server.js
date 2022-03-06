@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth');
 const postRouter = require('./routes/posts');
 const conversationRouter = require('./routes/conversations');
 const messageRouter = require('./routes/messages');
+const { errorHandler } = require('../api/utils/errorMiddleware');
 
 const app = express();
 const port = 8080;
@@ -26,6 +27,8 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/conversations', conversationRouter);
 app.use('/api/v1/messages', messageRouter);
+
+app.use(errorHandler); // Error handling middleware.
 
 app.listen(port, () =>
     console.log(`Social media app listening on port ${port}!`)
