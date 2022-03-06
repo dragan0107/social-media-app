@@ -13,7 +13,6 @@ const OnlineFriend = ({ onlineUsers, currentUserId, setCurrentChat }) => {
             try {
                 const res = await axios.get(`users/friends/${currentUserId}`);
                 setFriends(res.data);
-                console.log(res.data);
             } catch (error) {
                 console.log(error);
             }
@@ -38,6 +37,7 @@ const OnlineFriend = ({ onlineUsers, currentUserId, setCurrentChat }) => {
 
     return (
         <div>
+            {/* We loop through online friends array and return a friend component for each online person */}
             {onlineFriends.map((f) => (
                 <li className="rightbar-friend" onClick={() => handleClick(f)}>
                     <div className="friend-image-wrapper">

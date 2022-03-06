@@ -23,8 +23,8 @@ const Messenger = () => {
     const scrollRef = useRef();
 
     useEffect(() => {
-        socket.current = io('http://localhost:1717');
-        socket.current.emit('addUser', user._id);
+        socket.current = io('http://localhost:1717'); // Connects to socket server.
+        socket.current.emit('addUser', user._id); // Emits our logged in user id to the socket server.
 
         // We loop through logged in user followings and check if any of the online users matches the current user friends.
         socket.current.on('usersConnected', (users) => {
@@ -32,7 +32,7 @@ const Messenger = () => {
                 user.following.filter((f) => users.some((u) => u.userId === f))
             );
         });
-
+        // Listens to new messages and updates the arrival message state.
         socket.current.on('getMessage', (incMessage) => {
             setArrivalMessage({
                 sender: incMessage.senderId,
@@ -42,6 +42,8 @@ const Messenger = () => {
         });
     }, [user]);
 
+    /*We check if there's new message from the socket server, and if the current chat
+     partner is same as new message sender, it pushes it to current conversation. */
     useEffect(() => {
         arrivalMessage &&
             currentChat?.members.includes(arrivalMessage.sender) &&
@@ -51,19 +53,15 @@ const Messenger = () => {
     }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
-        socket?.current.on('welcome', (message) => {
-            console.log(message);
-        });
-    }, [socket, newMessage]);
-
-    useEffect(() => {
         getConversations(setConversations, user._id);
     }, [user]);
 
+    // Gets messages from current conversation.
     useEffect(() => {
         getMessages(setMessages, currentChat?._id);
     }, [currentChat]);
 
+    // Smooth scrolling to the last message in current conversation.
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
@@ -74,6 +72,8 @@ const Messenger = () => {
                 const receiverId = currentChat.members.find(
                     (member) => member !== user._id
                 );
+
+                // Emitting new message event to the server, send it to messages collection and display it in our current conversation.
                 socket.current.emit('sendMessage', {
                     senderId: user._id,
                     receiverId,
