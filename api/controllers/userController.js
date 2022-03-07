@@ -1,95 +1,64 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getUser = async (req, res) => {
-    try {
-        const { username, userId } = req.query;
+exports.getUser = catchAsync(async (req, res, next) => {
+    const { username, userId } = req.query;
 
-        const foundUser = username
-            ? await User.findOne({ username })
-            : await User.findById(userId);
-        const { password, updatedAt, ...rest } = foundUser._doc;
-        res.status(200).json(rest);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong.',
-        });
-    }
-};
+    const foundUser = username
+        ? await User.findOne({ username })
+        : await User.findById(userId);
+    const { password, updatedAt, ...rest } = foundUser._doc;
+    res.status(200).json(rest);
+});
 
-exports.updateUser = async (req, res) => {
+exports.updateUser = catchAsync(async (req, res, next) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
-            try {
-                req.body.password = await bcrypt.hash(req.body.password, 12);
-            } catch (error) {
-                return res.status(400).json({
-                    message: 'Something went wrong.',
-                });
-                console.log(error);
+            req.body.password = await bcrypt.hash(req.body.password, 12);
+        }
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body,
+            },
+            {
+                new: true,
             }
-        }
-        try {
-            const updatedUser = await User.findByIdAndUpdate(
-                req.params.id,
-                {
-                    $set: req.body,
-                },
-                {
-                    new: true,
-                }
-            );
-            res.status(200).json({
-                message: 'User info successfully updated.',
-                updatedUser,
-            });
-        } catch (error) {
-            res.status(500).json({
-                message: 'Something went wrong.',
-            });
-            console.log(error);
-        }
+        );
+        res.status(200).json({
+            message: 'User info successfully updated.',
+            updatedUser,
+        });
     }
-};
+});
 
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = catchAsync(async (req, res, next) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
-        try {
-            await User.findByIdAndDelete(req.params.id);
-            res.status(200).json({
-                message: 'User successfully deleted.',
-            });
-        } catch (error) {
-            res.status(500).json({
-                message: 'Something went wrong.',
-            });
-        }
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            message: 'User successfully deleted.',
+        });
     }
-};
+});
 
-exports.followUser = async (req, res) => {
+exports.followUser = catchAsync(async (req, res, next) => {
     if (req.params.id !== req.body.userId) {
-        try {
-            const user = await User.findById(req.params.id);
-            const currentUser = await User.findById(req.body.userId);
-            if (!user.followers.includes(req.body.userId)) {
-                await user.updateOne({ $push: { followers: req.body.userId } });
-                const updatedUser = await currentUser.updateOne({
-                    $push: { following: req.params.id },
-                });
-                res.status(200).json({
-                    message: 'User has been followed.',
-                    followers: updatedUser.followers,
-                });
-            } else {
-                res.status(403).json({
-                    message: 'You already follow this user.',
-                });
-            }
-        } catch (error) {
-            res.status(500).json({
-                message: 'Something went wrong.',
+        const user = await User.findById(req.params.id);
+        const currentUser = await User.findById(req.body.userId);
+        if (!user.followers.includes(req.body.userId)) {
+            await user.updateOne({ $push: { followers: req.body.userId } });
+            const updatedUser = await currentUser.updateOne({
+                $push: { following: req.params.id },
+            });
+            res.status(200).json({
+                message: 'User has been followed.',
+                followers: updatedUser.followers,
+            });
+        } else {
+            res.status(403).json({
+                message: 'You already follow this user.',
             });
         }
     } else {
@@ -97,30 +66,24 @@ exports.followUser = async (req, res) => {
             message: "You can't follow yourself.",
         });
     }
-};
+});
 
-exports.unfollowUser = async (req, res) => {
+exports.unfollowUser = catchAsync(async (req, res, next) => {
     if (req.params.id !== req.body.userId) {
-        try {
-            const user = await User.findById(req.params.id);
-            const currentUser = await User.findById(req.body.userId);
-            if (user.followers.includes(req.body.userId)) {
-                await user.updateOne({ $pull: { followers: req.body.userId } });
-                const updatedUser = await currentUser.updateOne({
-                    $pull: { following: req.params.id },
-                });
-                res.status(200).json({
-                    message: 'User has been unfollowed.',
-                    followers: updatedUser.followers,
-                });
-            } else {
-                res.status(403).json({
-                    message: 'You do not follow this user.',
-                });
-            }
-        } catch (error) {
-            res.status(500).json({
-                message: 'Something went wrong.',
+        const user = await User.findById(req.params.id);
+        const currentUser = await User.findById(req.body.userId);
+        if (user.followers.includes(req.body.userId)) {
+            await user.updateOne({ $pull: { followers: req.body.userId } });
+            const updatedUser = await currentUser.updateOne({
+                $pull: { following: req.params.id },
+            });
+            res.status(200).json({
+                message: 'User has been unfollowed.',
+                followers: updatedUser.followers,
+            });
+        } else {
+            res.status(403).json({
+                message: 'You do not follow this user.',
             });
         }
     } else {
@@ -128,27 +91,19 @@ exports.unfollowUser = async (req, res) => {
             message: "You can't unfollow yourself.",
         });
     }
-};
+});
 
-exports.getFriends = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.userId);
+exports.getFriends = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.params.userId);
 
-        const friends = await Promise.all(
-            user.following.map((friendId) => {
-                return User.findById(friendId);
-            })
-        );
+    const friends = await Promise.all(
+        user.following.map((friendId) => User.findById(friendId))
+    );
 
-        const friendsList = [];
-        friends.map((friend) => {
-            const { _id, username, profilePic } = friend;
-            friendsList.push({ _id, username, profilePic });
-        });
-        res.status(200).json(friendsList);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong.',
-        });
-    }
-};
+    const friendsList = [];
+    friends.map((friend) => {
+        const { _id, username, profilePic } = friend;
+        friendsList.push({ _id, username, profilePic });
+    });
+    res.status(200).json(friendsList);
+});

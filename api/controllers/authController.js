@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 //Token generator;
 
@@ -31,42 +32,28 @@ exports.userRegister = catchAsync(async (req, res) => {
         email: req.body.email,
     });
 
-    // const { password, ...rest } = newUser._doc;
-
     createSendToken(newUser, res);
-    // } catch (error) {
-    //     res.status(400).json({
-    //         message: 'Something went wrong..',
-    //         error: error,
-    //     });
-    // }
 });
 
 exports.userLogin = catchAsync(async (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        return res.status(400).json({
-            message: 'Username or password not input. Try again.',
-        });
+        return next(
+            new AppError('Username or password not input. Try again.', 400)
+        );
     }
 
     const foundUser = await User.findOne({ username });
 
     if (!foundUser) {
-        // return res.status(404).json({ message: "User doesn't exist." });
-        return next({
-            statusCode: 404,
-            message: 'user doesnt exist nigga',
-        });
+        return next(new AppError('User not found.', 404));
     }
 
     const validatePass = await bcrypt.compare(password, foundUser.password);
 
     if (!validatePass) {
-        return res.status(404).json({
-            message: 'Wrong credentials.',
-        });
+        return next(new AppError('Wrong credentials.', 404));
     }
     createSendToken(foundUser, res);
 });
@@ -83,9 +70,7 @@ exports.protect = async (req, res, next) => {
     }
     //If no token, asks user to login again and provide a new token
     if (!token) {
-        return res.status(404).json({
-            message: 'No token, please login again!',
-        });
+        return next(new AppError('No token, please login again!', 404));
     }
 
     //token verification
@@ -100,14 +85,10 @@ exports.protect = async (req, res, next) => {
         try {
             await User.findById(decodedToken.id);
         } catch (error) {
-            return res.status(404).json({
-                message: 'No user with that token.',
-            });
+            return next(new AppError('No user with that token.', 404));
         }
     } else {
-        return res.status(404).json({
-            message: 'Invalid token, please login again!',
-        });
+        return next(new AppError('Invalid token, please login again!', 403));
     }
     next();
 };

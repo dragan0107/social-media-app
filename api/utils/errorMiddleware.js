@@ -1,7 +1,6 @@
 exports.errorHandler = (err, req, res, next) => {
-    console.log(err);
-
-    res.status(404).json({
-        err,
+    res.status(err.statusCode || 500).json({
+        status: err.status || 'error',
+        message: err.message || 'Something went wrong, please try again.',
     });
 };
