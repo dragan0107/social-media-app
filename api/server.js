@@ -6,7 +6,7 @@ const authRouter = require('./routes/auth');
 const postRouter = require('./routes/posts');
 const conversationRouter = require('./routes/conversations');
 const messageRouter = require('./routes/messages');
-const { errorHandler } = require('../api/utils/errorMiddleware');
+const { errorHandler } = require('./utils/errorMiddleware');
 
 const app = express();
 const port = 8080;
