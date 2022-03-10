@@ -55,7 +55,7 @@ export const getPosts = async (
         setPosts(res.data.allPosts);
         setPostsFetching(false);
     } catch (error) {
-        if (error.response.status === 404) {
+        if (error.response.status === 403) {
             dispatch({ type: 'LOGOUT' });
             localStorage.removeItem('jwt');
             localStorage.removeItem('user');
