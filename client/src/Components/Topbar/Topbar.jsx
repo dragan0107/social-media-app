@@ -26,7 +26,7 @@ const Topbar = () => {
                     <h1 className="brand-name">Friendbook</h1>
                 </div>
                 <div className="center">
-                    <input type="text" placeholder="Search" />
+                    <input id="search-bar" type="text" placeholder="Search" />
                     <Link to="/" className="homepage-link">
                         Homepage
                     </Link>

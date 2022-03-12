@@ -94,7 +94,12 @@ const RightBar = ({ profile, userInfo, usernameURL, loggedUser }) => {
                                 <PersonRemoveIcon />
                             </button>
                         )}
-                        <h4>User information</h4>
+                        <h4>
+                            About{' '}
+                            <span className="about-username">
+                                {userInfo.username}
+                            </span>
+                        </h4>
                         <div className="user-info-line"></div>
                         <div className="info-item">
                             <span className="info-first">Living in: </span>
