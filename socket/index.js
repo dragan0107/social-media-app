@@ -48,5 +48,9 @@ io.on('connection', (socket) => {
         io.emit('usersConnected', users);
     });
 
+    socket.on('userTyping', ({userTyping}) => {
+        console.log(userTyping)
+    })
+
     socket.emit('usersConnected', users);
 });

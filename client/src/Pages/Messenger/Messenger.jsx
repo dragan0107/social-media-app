@@ -7,6 +7,7 @@ import './Messenger.css';
 import { AuthContext } from '../../Context/AuthContext';
 import { getConversations, getMessages } from '../../API_Actions/ApiCalls';
 import axios from 'axios';
+import { debounce } from 'lodash';
 import { io } from 'socket.io-client';
 
 const Messenger = () => {
@@ -18,12 +19,12 @@ const Messenger = () => {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState(null);
+    const newMessage = useRef(null);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const scrollRef = useRef();
-
+    let isTyping = false;
     useEffect(() => {
-        socket.current = io('http://localhost:1717'); // Connects to socket server.
+        socket.current = io('ws://localhost:1717'); // Connects to socket server.
         socket.current.emit('addUser', user._id); // Emits our logged in user id to the socket server.
 
         // We loop through logged in user followings and check if any of the online users matches the current user friends.
@@ -67,7 +68,7 @@ const Messenger = () => {
     }, [messages]);
 
     const handleClick = async () => {
-        if (newMessage) {
+        if (newMessage.current.value) {
             try {
                 const receiverId = currentChat.members.find(
                     (member) => member !== user._id
@@ -77,22 +78,50 @@ const Messenger = () => {
                 socket.current.emit('sendMessage', {
                     senderId: user._id,
                     receiverId,
-                    text: newMessage,
+                    text: newMessage.current.value,
                 });
                 const res = await axios.post('/messages/', {
                     conversationId: currentChat?._id,
                     sender: user._id,
-                    text: newMessage,
+                    text: newMessage.current.value,
                 });
                 setMessages((prevValues) => {
                     return [...prevValues, res.data.newMsg];
                 });
-                setNewMessage('');
+                newMessage.current.value = '';
             } catch (error) {
                 console.log(error);
             }
         }
     };
+
+    const changeToFalse = () => {
+        isTyping = false;
+        socket.current.emit('userTyping', {
+            userTyping: false,
+        });
+    };
+    const handleTyping = debounce(changeToFalse, 1500);
+
+    const throttle = (cb, delay = 15000) => {
+        let shouldWait = false;
+
+        return () => {
+            if (shouldWait) return;
+            cb();
+            shouldWait = true;
+
+            setTimeout(() => {
+                shouldWait = false;
+            }, delay);
+        };
+    };
+
+    const emitTyping = throttle(() => {
+        socket.current.emit('userTyping', {
+            userTyping: true,
+        });
+    });
 
     return (
         <div className="container-messenger">
@@ -147,8 +176,12 @@ const Messenger = () => {
                                 rows={6}
                                 autoFocus
                                 placeholder="Message your friend..."
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                value={newMessage}
+                                onChange={(e) => {
+                                    isTyping = true;
+                                    emitTyping();
+                                    handleTyping();
+                                }}
+                                ref={newMessage}
                             ></textarea>
                             <button
                                 className="msg-send-btn"

@@ -46,6 +46,7 @@ exports.userLogin = catchAsync(async (req, res, next) => {
 
     const foundUser = await User.findOne({ username });
 
+
     if (!foundUser) {
         return next(new AppError('User not found.', 404));
     }
