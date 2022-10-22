@@ -57,7 +57,6 @@ const Profile = () => {
     };
     return (
         <div>
-            <Topbar />
             <div className="profile">
                 <Sidebar />
                 <div className="profile-right">

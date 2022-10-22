@@ -13,8 +13,16 @@ const generateToken = (id) =>
 
 const createSendToken = (user, res) => {
     const token = generateToken(user._id);
+    const cookieOptions = {
+        expires: new Date(Date.now() + 4 * 24 * 3600 * 1000),
+        httpOnly: true,
+    };
+
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     const { password, ...rest } = user._doc;
+
+    res.cookie('jwt', token);
 
     res.status(201).json({
         message: 'Success',
@@ -45,7 +53,6 @@ exports.userLogin = catchAsync(async (req, res, next) => {
     }
 
     const foundUser = await User.findOne({ username });
-
 
     if (!foundUser) {
         return next(new AppError('User not found.', 404));

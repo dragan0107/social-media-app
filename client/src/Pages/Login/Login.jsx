@@ -15,7 +15,6 @@ const Login = () => {
 
         loginUser(username, password, dispatch);
     };
-    console.log(user);
 
     return (
         <div className="login">

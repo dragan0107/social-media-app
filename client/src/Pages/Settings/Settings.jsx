@@ -59,7 +59,6 @@ const Settings = () => {
 
     return (
         <div>
-            <Topbar />
             <div className="profile-settings">
                 <Sidebar />
                 <div className="settings-right">

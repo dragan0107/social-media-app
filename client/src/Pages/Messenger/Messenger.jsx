@@ -9,6 +9,7 @@ import { getConversations, getMessages } from '../../API_Actions/ApiCalls';
 import axios from 'axios';
 import { debounce } from 'lodash';
 import { io } from 'socket.io-client';
+import { throttle } from '../../utils/utils';
 
 const Messenger = () => {
     const { user } = useContext(AuthContext);
@@ -103,20 +104,6 @@ const Messenger = () => {
     };
     const handleTyping = debounce(changeToFalse, 1500);
 
-    const throttle = (cb, delay = 15000) => {
-        let shouldWait = false;
-
-        return () => {
-            if (shouldWait) return;
-            cb();
-            shouldWait = true;
-
-            setTimeout(() => {
-                shouldWait = false;
-            }, delay);
-        };
-    };
-
     const emitTyping = throttle(() => {
         socket.current.emit('userTyping', {
             userTyping: true,
@@ -125,7 +112,6 @@ const Messenger = () => {
 
     return (
         <div className="container-messenger">
-            <Topbar />
             <section className="messenger-wrapper">
                 <div className="conversation-list">
                     <div className="conversations-box">
